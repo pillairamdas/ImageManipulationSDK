@@ -12,14 +12,14 @@ int main(int argc, char *argv[])
 
 	/* Check for application validity */
 	if(argc < 7) {
-		printf("\n\nUsage: %s <input image> <width> <height> <bits per pixel> <N value> <colors> \n\n", argv[0]);
+		LOG(ERROR, "Usage: %s <input image> <width> <height> <bits per pixel> <N value> <colors> \n\n", argv[0]);
 		goto EXIT;
 	}
 
 
 	input_img = (tagImageProp *) malloc (sizeof(tagImageProp));
 	if(input_img == NULL) {
-		printf("[ERROR] %d: Memory unavailable!\n", __LINE__);
+		LOG(ERROR, "Memory unavailable!\n");
 		goto FREE_MEM;		
 	}
 
@@ -32,7 +32,7 @@ int main(int argc, char *argv[])
 
 	input_img->buffer = (uint8_t *) malloc(input_img->size);
 	if(input_img->buffer == NULL) {
-		printf("[ERROR] %d: Memory unavailable!\n", __LINE__);
+		LOG(ERROR, "Memory unavailable!\n");
 		goto FREE_MEM;
 	}
 
@@ -42,7 +42,7 @@ int main(int argc, char *argv[])
 
 	output_img = (tagImageProp *) malloc(sizeof(tagImageProp));
 	if(output_img == NULL) {
-		printf("[ERROR] %d: Memory unavailable!\n", __LINE__);
+		LOG(ERROR, "Memory unavailable!\n");
 		goto FREE_MEM;		
 	}
 
@@ -54,7 +54,7 @@ int main(int argc, char *argv[])
 
 	output_img->buffer = (uint8_t *) malloc(output_img->size);
 	if(output_img->buffer == NULL) {
-		printf("[ERROR] %d: Memory unavailable!\n", __LINE__);
+		LOG(ERROR, "Memory unavailable!\n");
 		goto FREE_MEM;
 	}
 
@@ -64,7 +64,7 @@ int main(int argc, char *argv[])
 
 	col_conv_img = (tagImageProp *) malloc(sizeof(tagImageProp));
 	if(col_conv_img == NULL) {
-		printf("[ERROR] %d: Memory unavailable!\n", __LINE__);
+		LOG(ERROR, "Memory unavailable!\n");
 		goto FREE_MEM;		
 	}
 
@@ -76,7 +76,7 @@ int main(int argc, char *argv[])
 
 	col_conv_img->buffer = (uint8_t *) malloc(col_conv_img->size);
 	if(col_conv_img->buffer == NULL) {
-		printf("[ERROR] %d: Memory unavailable!\n", __LINE__);
+		LOG(ERROR, "Memory unavailable!\n");
 		goto FREE_MEM;
 	}
 

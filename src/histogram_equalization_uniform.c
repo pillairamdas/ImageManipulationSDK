@@ -77,7 +77,7 @@ void uniform_histogram_equalize(tagImageProp *input_img, tagImageProp *output_im
 #ifdef PRINT_OUTPUT
 		iterator = 0;
 		while(iterator < RGB_PIXEL_LEVELS) {
-			printf("Histogram[%d] %d\n", channel_count, gray_bin[iterator]);
+			LOG(DEBUG, "Histogram[%d] %d\n", channel_count, gray_bin[iterator]);
 			++iterator;
 		}
 #endif 

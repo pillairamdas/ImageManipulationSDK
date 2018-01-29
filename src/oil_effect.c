@@ -37,7 +37,7 @@ tagStatus oil_effect(tagImageProp *input_img, tagImageProp *output_img, int wind
 	int      green_bin[RGB_PIXEL_LEVELS]    = {0};
 
 	if((window_size > 11) || (window_size < 3) || ((window_size & 0x1) == 0)) {
-		printf("[ERROR]: %d is not a valid window size\n", window_size);
+		LOG(ERROR, "%d is not a valid window size\n", window_size);
 		return ERROR_WINDOW_SIZE;
 	}
 

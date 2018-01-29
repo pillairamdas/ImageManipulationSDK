@@ -9,14 +9,14 @@ int main(int argc, char *argv[])
 
 	/* Check for application validity */
 	if(argc < 7) {
-		printf("\n\nUsage: %s <input image> <input_width> <input_height> <input bits per pixel> <output_width> <output_height>\n\n", argv[0]);
+		LOG(ERROR, "Usage: %s <input image> <input_width> <input_height> <input bits per pixel> <output_width> <output_height>\n\n", argv[0]);
 		goto EXIT;
 	}
 
 
 	input_img = (tagImageProp *) malloc (sizeof(tagImageProp));
 	if(input_img == NULL) {
-		printf("[ERROR] %d: Memory unavailable!\n", __LINE__);
+		LOG(ERROR, "Memory unavailable!\n");
 		goto FREE_MEM;		
 	}
 
@@ -29,7 +29,7 @@ int main(int argc, char *argv[])
 
 	input_img->buffer = (uint8_t *) malloc(input_img->size);
 	if(input_img->buffer == NULL) {
-		printf("[ERROR] %d: Memory unavailable!\n", __LINE__);
+		LOG(ERROR, "Memory unavailable!\n");
 		goto FREE_MEM;
 	}
 
@@ -39,7 +39,7 @@ int main(int argc, char *argv[])
 
 	output_img = (tagImageProp *) malloc(sizeof(tagImageProp));
 	if(output_img == NULL) {
-		printf("[ERROR] %d: Memory unavailable!\n", __LINE__);
+		LOG(ERROR, "Memory unavailable!\n");
 		goto FREE_MEM;		
 	}
 
@@ -51,7 +51,7 @@ int main(int argc, char *argv[])
 
 	output_img->buffer = (uint8_t *) malloc(output_img->size);
 	if(output_img->buffer == NULL) {
-		printf("[ERROR] %d: Memory unavailable!\n", __LINE__);
+		LOG(ERROR, "Memory unavailable!\n");
 		goto FREE_MEM;
 	}
 

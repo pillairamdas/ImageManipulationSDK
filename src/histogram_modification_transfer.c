@@ -53,17 +53,15 @@ void histogram_modify(tagImageProp *input_img, tagImageProp *output_img, tagHist
 	}
 
 
-#ifdef PRINT_OUTPUT
 	iterator = 0;
-	printf("Histogram of input image: \n");
+	LOG(OUTPUT, "Histogram of input image: \n");
 	while(iterator < RGB_PIXEL_LEVELS) {
-		printf("Red %d Green %d Blue %d\n", gray_level_bin[RED_CHANNEL][iterator], \
+		LOG(OUTPUT, "Red %d Green %d Blue %d\n", gray_level_bin[RED_CHANNEL][iterator], \
 			                                gray_level_bin[GREEN_CHANNEL][iterator], \
 			                                gray_level_bin[BLUE_CHANNEL][iterator]);
 		++iterator;
 	}
-	printf("\n");
-#endif
+	LOG(OUTPUT, "\n");
 
 	/* Required operation is histogram equalization */
 	if(method == HIST_EQUALIZE_TRANSFER_FUNCTION) {
@@ -81,15 +79,11 @@ void histogram_modify(tagImageProp *input_img, tagImageProp *output_img, tagHist
 			/* cdf table */	
 			cdf_bins[0] = prob_bins[0];
 			iterator = 1;
-#ifdef PRINT_OUTPUT	
-			printf("CDF of input image histogram: \n");
-#endif
+			LOG(OUTPUT, "CDF of input image histogram: \n");
 			while(iterator < RGB_PIXEL_LEVELS) {
 				cdf_bins[iterator] = prob_bins[iterator] + cdf_bins[iterator - 1];
 
-#ifdef PRINT_OUTPUT	
-				printf("Channel: %d CDF %f \n", channel_count, cdf_bins[iterator]);
-#endif
+				LOG(OUTPUT, "Channel: %d CDF %f \n", channel_count, cdf_bins[iterator]);
 
 				++iterator;
 			}

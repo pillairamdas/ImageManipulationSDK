@@ -11,14 +11,14 @@ int main(int argc, char *argv[])
 
 	/* Check for application validity */
 	if(argc < 6) {
-		printf("\n\nUsage: ./p1 <input image> <width> <height> <bits per pixel> <colors>\n\n");
+		LOG(ERROR, "Usage: ./p1 <input image> <width> <height> <bits per pixel> <colors>\n\n");
 		goto EXIT;
 	}
 
 
 	input_img = (tagImageProp *) malloc (sizeof(tagImageProp));
 	if(input_img == NULL) {
-		printf("[ERROR] %d: Memory unavailable!\n", __LINE__);
+		LOG(ERROR, "Memory unavailable!\n");
 		goto FREE_MEM;		
 	}
 
@@ -31,7 +31,7 @@ int main(int argc, char *argv[])
 
 	input_img->buffer = (uint8_t *) malloc(input_img->size);
 	if(input_img->buffer == NULL) {
-		printf("[ERROR] %d: Memory unavailable!\n", __LINE__);
+		LOG(ERROR, "Memory unavailable!\n");
 		goto FREE_MEM;
 	}
 
@@ -41,7 +41,7 @@ int main(int argc, char *argv[])
 
 	output_img = (tagImageProp *) malloc(sizeof(tagImageProp));
 	if(output_img == NULL) {
-		printf("[ERROR] %d: Memory unavailable!\n", __LINE__);
+		LOG(ERROR, "Memory unavailable!\n");
 		goto FREE_MEM;		
 	}
 
@@ -53,13 +53,12 @@ int main(int argc, char *argv[])
 
 	output_img->buffer = (uint8_t *) malloc(output_img->size);
 	if(output_img->buffer == NULL) {
-		printf("[ERROR] %d: Memory unavailable!\n", __LINE__);
+		LOG(ERROR, "Memory unavailable!\n");
 		goto FREE_MEM;
 	}
 
 	colors = atoi(argv[5]);
 
-	printf("%s: %d\n", __FILE__, __LINE__);
 	change_color_palette(input_img, output_img, colors);
 
 	if((dump_to_file(output_img->buffer, output_img->size, "color_conversion.raw")) != 0) {

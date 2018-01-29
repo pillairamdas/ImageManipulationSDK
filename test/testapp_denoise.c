@@ -12,14 +12,14 @@ int main(int argc, char *argv[])
 
 	/* Check for application validity */
 	if(argc < 7) {
-		printf("\n\nUsage: %s <input image> <original_image> <input_width> <input_height> <input bits per pixel> <window size>\n\n", argv[0]);
+		LOG(ERROR, "Usage: %s <input image> <original_image> <input_width> <input_height> <input bits per pixel> <window size>\n\n", argv[0]);
 		goto EXIT;
 	}
 
 
 	input_img = (tagImageProp *) malloc (sizeof(tagImageProp));
 	if(input_img == NULL) {
-		printf("[ERROR] %d: Memory unavailable!\n", __LINE__);
+		LOG(ERROR, "Memory unavailable!\n");
 		goto FREE_MEM;		
 	}
 
@@ -33,7 +33,7 @@ int main(int argc, char *argv[])
 
 	input_img->buffer = (uint8_t *) malloc(input_img->size);
 	if(input_img->buffer == NULL) {
-		printf("[ERROR] %d: Memory unavailable!\n", __LINE__);
+		LOG(ERROR, "Memory unavailable!\n");
 		goto FREE_MEM;
 	}
 
@@ -44,7 +44,7 @@ int main(int argc, char *argv[])
 
 	original_img = (tagImageProp *) malloc (sizeof(tagImageProp));
 	if(original_img == NULL) {
-		printf("[ERROR] %d: Memory unavailable!\n", __LINE__);
+		LOG(ERROR, "Memory unavailable!\n");
 		goto FREE_MEM;		
 	}
 
@@ -58,7 +58,7 @@ int main(int argc, char *argv[])
 
 	original_img->buffer = (uint8_t *) malloc(original_img->size);
 	if(original_img->buffer == NULL) {
-		printf("[ERROR] %d: Memory unavailable!\n", __LINE__);
+		LOG(ERROR, "Memory unavailable!\n");
 		goto FREE_MEM;
 	}
 
@@ -69,7 +69,7 @@ int main(int argc, char *argv[])
 
 	output_img = (tagImageProp *) malloc(sizeof(tagImageProp));
 	if(output_img == NULL) {
-		printf("[ERROR] %d: Memory unavailable!\n", __LINE__);
+		LOG(ERROR, "Memory unavailable!\n");
 		goto FREE_MEM;		
 	}
 
@@ -81,13 +81,13 @@ int main(int argc, char *argv[])
 
 	output_img->buffer = (uint8_t *) malloc(output_img->size);
 	if(output_img->buffer == NULL) {
-		printf("[ERROR] %d: Memory unavailable!\n", __LINE__);
+		LOG(ERROR, "Memory unavailable!\n");
 		goto FREE_MEM;
 	}
 
 	output_img_median = (tagImageProp *) malloc(sizeof(tagImageProp));
 	if(output_img_median == NULL) {
-		printf("[ERROR] %d: Memory unavailable!\n", __LINE__);
+		LOG(ERROR, "Memory unavailable!\n");
 		goto FREE_MEM;		
 	}
 
@@ -99,23 +99,23 @@ int main(int argc, char *argv[])
 
 	output_img_median->buffer = (uint8_t *) malloc(output_img_median->size);
 	if(output_img_median->buffer == NULL) {
-		printf("[ERROR] %d: Memory unavailable!\n", __LINE__);
+		LOG(ERROR, "Memory unavailable!\n");
 		goto FREE_MEM;
 	}
 
 	remove_image_noise(input_img, output_img_median, window_size, NOISE_REMOVE_MEDIAN_FILTER);
 	remove_image_noise(output_img_median, output_img, window_size, NOISE_REMOVE_GAUSSIAN_FILTER);
 
-	printf("\n########################################################\n");
-	printf("Statistics for Noisy Image\n");
+	LOG(OUTPUT, "\n########################################################\n");
+	LOG(OUTPUT, "Statistics for Noisy Image\n");
 	print_psnr(original_img, input_img);
-	printf("\n########################################################\n");
-	printf("Statistics for Image after Median filtering\n");
+	LOG(OUTPUT, "\n########################################################\n");
+	LOG(OUTPUT, "Statistics for Image after Median filtering\n");
 	print_psnr(original_img, output_img_median);
-	printf("\n########################################################\n");
-	printf("Statistics for Image after Gaussian filtering\n");
+	LOG(OUTPUT, "\n########################################################\n");
+	LOG(OUTPUT, "Statistics for Image after Gaussian filtering\n");
 	print_psnr(original_img, output_img);
-	printf("\n########################################################\n");	
+	LOG(OUTPUT, "\n########################################################\n");	
 
 
 	if((dump_to_file(output_img->buffer, output_img->size, "Basic_Filtering.raw")) != 0) {
@@ -124,9 +124,9 @@ int main(int argc, char *argv[])
 
 
 	remove_image_noise(output_img_median, output_img, window_size, NOISE_REMOVE_LINEAR_FILTER);
-	printf("Statistics for Image after Linear filtering\n");
+	LOG(OUTPUT, "Statistics for Image after Linear filtering\n");
 	print_psnr(original_img, output_img);
-	printf("\n########################################################\n");	
+	LOG(OUTPUT, "\n########################################################\n");	
 
 
 	if((dump_to_file(output_img->buffer, output_img->size, "Linear_Filtering.raw")) != 0) {
@@ -137,18 +137,6 @@ int main(int argc, char *argv[])
 	if((dump_to_file(output_img_median->buffer, output_img_median->size, "Median_Filtered.raw")) != 0) {
 		goto FREE_MEM;
 	}
-
-
-
-
-	// int i = 0;
-	// uint8_t *buffer;
-	// while(i < output_img_median->pixel_count) {
-	// 	buffer = output_img_median->buffer + i*output_img_median->bpp;
-	// 	printf("%d %d %d\n", *(buffer + 0), *(buffer + 1) , *(buffer + 2));
-	// 	++i;
-	// }
-
 
 
 FREE_MEM:

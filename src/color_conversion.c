@@ -118,7 +118,7 @@ tagStatus convert_color(tagImageProp *input_img, tagImageProp *output_img, long 
 		color_cbr = (int) cbrt(colors);
 
 		if(colors != (color_cbr * color_cbr * color_cbr)) {
-			printf("[ERROR]: %lld is not a valid color level\n", colors);
+			LOG(ERROR, "%lld is not a valid color level\n", colors);
 			return ERROR_INCORRECT_COLOR_LEVEL;
 		}
 
@@ -132,12 +132,12 @@ tagStatus convert_color(tagImageProp *input_img, tagImageProp *output_img, long 
 	*/
 	color_level    = (int **) malloc(input_img->bpp * sizeof(int *));
 	if(color_level == NULL) {
-		printf("[ERROR] %d: Memory unavailable!\n", __LINE__);
+		LOG(ERROR, "Memory unavailable!\n");
 		goto FREE_MEM;		
 	}	
 	boundary_level = (int **) malloc(input_img->bpp * sizeof(int *));
 	if(boundary_level == NULL) {
-		printf("[ERROR] %d: Memory unavailable!\n", __LINE__);
+		LOG(ERROR, "Memory unavailable!\n");
 		goto FREE_MEM;		
 	}
 
@@ -151,12 +151,12 @@ tagStatus convert_color(tagImageProp *input_img, tagImageProp *output_img, long 
 		*/
 		color_level[channel_count] = (int *) malloc(len[channel_count] * sizeof(int));
 		if(color_level[channel_count] == NULL) {
-			printf("[ERROR] %d: Memory unavailable!\n", __LINE__);
+			LOG(ERROR, "Memory unavailable!\n");
 			goto FREE_MEM;		
 		}
 		boundary_level[channel_count] = (int *) malloc(len[channel_count] * sizeof(int));
 		if(boundary_level[channel_count] == NULL) {
-			printf("[ERROR] %d: Memory unavailable!\n", __LINE__);
+			LOG(ERROR, "Memory unavailable!\n");
 			goto FREE_MEM;		
 		}		
 		++channel_count;		
@@ -171,9 +171,9 @@ tagStatus convert_color(tagImageProp *input_img, tagImageProp *output_img, long 
 		fetch_color_levels(input_img, color_level, boundary_level, len, channel_count);
 #ifdef DEBUG
 		iterator = 0;
-		printf("\nChannel %d: ", channel_count);
+		LOG(DEBUG, "Channel %d: ", channel_count);
 		while(iterator < len[channel_count]) {
-			printf(" %d-%d ", *(color_level[channel_count] + iterator), *(boundary_level[channel_count] + iterator));
+			LOG(OUTPUT, " %d-%d ", *(color_level[channel_count] + iterator), *(boundary_level[channel_count] + iterator));
 			++iterator;
 		}
 #endif

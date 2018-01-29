@@ -11,15 +11,15 @@ int main(int argc, char *argv[])
 
 	/* Check for application validity */
 	if(argc < 6) {
-		printf("\n\nUsage: %s <input image> <input_width> <input_height> <input bits per pixel> <method> \n", argv[0]);
-		printf("method: transfer or uniform\n\n");
+		LOG(ERROR, "Usage: %s <input image> <input_width> <input_height> <input bits per pixel> <method> \n", argv[0]);
+		LOG(ERROR, "method: transfer or uniform\n\n");
 		goto EXIT;
 	}
 
 
 	input_img = (tagImageProp *) malloc (sizeof(tagImageProp));
 	if(input_img == NULL) {
-		printf("[ERROR] %d: Memory unavailable!\n", __LINE__);
+		LOG(ERROR, "Memory unavailable!\n");
 		goto FREE_MEM;		
 	}
 
@@ -32,7 +32,7 @@ int main(int argc, char *argv[])
 
 	input_img->buffer = (uint8_t *) malloc(input_img->size);
 	if(input_img->buffer == NULL) {
-		printf("[ERROR] %d: Memory unavailable!\n", __LINE__);
+		LOG(ERROR, "Memory unavailable!\n");
 		goto FREE_MEM;
 	}
 
@@ -42,7 +42,7 @@ int main(int argc, char *argv[])
 
 	output_img = (tagImageProp *) malloc(sizeof(tagImageProp));
 	if(output_img == NULL) {
-		printf("[ERROR] %d: Memory unavailable!\n", __LINE__);
+		LOG(ERROR, "Memory unavailable!\n");
 		goto FREE_MEM;		
 	}
 
@@ -56,7 +56,7 @@ int main(int argc, char *argv[])
 
 	output_img->buffer = (uint8_t *) malloc(output_img->size);
 	if(output_img->buffer == NULL) {
-		printf("[ERROR] %d: Memory unavailable!\n", __LINE__);
+		LOG(ERROR, "Memory unavailable!\n");
 		goto FREE_MEM;
 	}
 
@@ -65,7 +65,7 @@ int main(int argc, char *argv[])
 	} else if(strcmp(method, "uniform") == 0) {
 		contrast_manipulate(input_img, output_img, HIST_EQUALIZE_EQUAL_PROBABILITY);
 	} else {
-		printf("[ERROR]: INCORRECT_INPUT for method\n");
+		LOG(ERROR, "INCORRECT_INPUT for method\n");
 		goto FREE_MEM;
 	}
 

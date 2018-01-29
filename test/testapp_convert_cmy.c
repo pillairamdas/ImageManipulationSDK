@@ -21,14 +21,14 @@ int main(int argc, char* argv[])
 
 	/* Check for application validity */
 	if(argc < 5) {
-		printf("\n\nUsage: %s <input image> <width> <height> <bits per pixel>\n\n", argv[0]);
+		LOG(ERROR, "Usage: %s <input image> <width> <height> <bits per pixel>\n\n", argv[0]);
 		goto EXIT;
 	}
 
 	/* Allocate memory for input image properties */
 	input_img = (tagImageProp *) malloc(sizeof(tagImageProp));
 	if(input_img == NULL) {
-		printf("[ERROR] %d: Memory unavailable!\n", __LINE__);
+		LOG(ERROR, "Memory unavailable!\n");
 		goto FREE_MEM;
 	}
 
@@ -44,7 +44,7 @@ int main(int argc, char* argv[])
 	input_img->size = input_img->pixel_count * input_img->bpp;
 	input_img->buffer = (uint8_t *) malloc(input_img->size);
 	if(input_img->buffer == NULL) {
-		printf("[ERROR] %d: Memory unavailable!\n", __LINE__);
+		LOG(ERROR, "Memory unavailable!\n");
 		goto FREE_MEM;	
 	}	
 
@@ -55,25 +55,25 @@ int main(int argc, char* argv[])
 
 	output_img_cmy = (tagImageProp *) malloc(sizeof(tagImageProp));
 	if(output_img_cmy == NULL) {
-		printf("[ERROR] %d: Memory unavailable!\n", __LINE__);
+		LOG(ERROR, "Memory unavailable!\n");
 		goto FREE_MEM;
 	}
 
 	output_img_cyan = (tagImageProp *) malloc(sizeof(tagImageProp));
 	if(output_img_cyan == NULL) {
-		printf("[ERROR] %d: Memory unavailable!\n", __LINE__);
+		LOG(ERROR, "Memory unavailable!\n");
 		goto FREE_MEM;
 	}
 
 	output_img_magenta = (tagImageProp *) malloc(sizeof(tagImageProp));
 	if(output_img_magenta == NULL) {
-		printf("[ERROR] %d: Memory unavailable!\n", __LINE__);
+		LOG(ERROR, "Memory unavailable!\n");
 		goto FREE_MEM;
 	}
 
 	output_img_yellow = (tagImageProp *) malloc(sizeof(tagImageProp));
 	if(output_img_yellow == NULL) {
-		printf("[ERROR] %d: Memory unavailable!\n", __LINE__);
+		LOG(ERROR, "Memory unavailable!\n");
 		goto FREE_MEM;
 	}
 
@@ -107,24 +107,24 @@ int main(int argc, char* argv[])
 
 	output_img_cmy->buffer = (uint8_t *) malloc(output_img_cmy->size);
 	if(output_img_cmy->buffer == NULL) {
-		printf("[ERROR] %d: Memory unavailable!\n", __LINE__);
+		LOG(ERROR, "Memory unavailable!\n");
 		goto FREE_MEM;
 	}
 
 	output_img_yellow->buffer = (uint8_t *) malloc(output_img_yellow->size);
 	if(output_img_yellow->buffer == NULL) {
-		printf("[ERROR] %d: Memory unavailable!\n", __LINE__);
+		LOG(ERROR, "Memory unavailable!\n");
 		goto FREE_MEM;
 	}
 
 	output_img_magenta->buffer = (uint8_t *) malloc(output_img_magenta->size);
 	if(output_img_magenta->buffer == NULL) {
-		printf("[ERROR] %d: Memory unavailable!\n", __LINE__);
+		LOG(ERROR, "Memory unavailable!\n");
 		goto FREE_MEM;
 	}
 	output_img_cyan->buffer = (uint8_t *) malloc(output_img_cyan->size);
 	if(output_img_cyan->buffer == NULL) {
-		printf("[ERROR] %d: Memory unavailable!\n", __LINE__);
+		LOG(ERROR, "Memory unavailable!\n");
 		goto FREE_MEM;
 	}
 

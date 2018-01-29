@@ -49,7 +49,7 @@ int dump_to_file(uint8_t* buf, int size, char *str)
 	/* Open the file for writing */
 	out_fd = open(str, O_CREAT|O_WRONLY, 0666);
 	if(out_fd < 0) {
-		printf("[ERROR]: Unable to open output file %s with error: %s\n", str, strerror(errno));
+		LOG(ERROR, "Unable to open output file %s with error: %s\n", str, strerror(errno));
 		exit(1);
 	}	
 
@@ -57,7 +57,7 @@ int dump_to_file(uint8_t* buf, int size, char *str)
 	if((status = write(out_fd, buf, size)) >= 0) {
 		return 0;
 	} else {
-		printf("[ERROR]: Write Error for %s with error: %s\n", str, strerror(errno));
+		LOG(ERROR, "Write Error for %s with error: %s\n", str, strerror(errno));
 		return -1;
 	}
 
@@ -82,7 +82,7 @@ int read_from_file(uint8_t *buf, int size, char *str)
 	/* Open the file for reading */ 
 	in_fd = open(str, O_RDONLY);
 	if(in_fd < 0) {
-		printf("[Error]: Unable to open input file %s with error: %s\n", str,strerror(errno));
+		LOG(ERROR, "Unable to open input file %s with error: %s\n", str,strerror(errno));
 		exit(1);
 	}
 
@@ -90,7 +90,7 @@ int read_from_file(uint8_t *buf, int size, char *str)
 	if((status = read(in_fd, buf, size)) >= 0) {
 		return 0;
 	} else {
-		printf("[ERROR]: Read Error for %s with error: %s\n", str, strerror(errno));
+		LOG(ERROR, "Read Error for %s with error: %s\n", str, strerror(errno));
 		return -1;	
 	}
 
@@ -223,21 +223,21 @@ void get_PSNR(tagImageProp *input_img, tagImageProp *filtered_img)
 		psnr_255 = 10.0 * log10(pow(255,2) / mse);
 		psnr_max = 10.0 * log10(pow(max_intensity,2) / mse);
 
-		printf("\n\n*************************************************\n");
+		LOG(OUTPUT, "\n\n*************************************************\n");
 		switch(channel_count) {
-			case 0: { printf("The statistics for RED channel is: \n"); } break;
-			case 1: { printf("The statistics for GREEN channel is: \n"); } break;
-			case 2: { printf("The statistics for BLUE channel is: \n"); } break;
-			default: { printf("Incorrect Channel count \n"); } break;
+			case 0: { LOG(OUTPUT, "The statistics for RED channel is: \n"); } break;
+			case 1: { LOG(OUTPUT, "The statistics for GREEN channel is: \n"); } break;
+			case 2: { LOG(OUTPUT, "The statistics for BLUE channel is: \n"); } break;
+			default: { LOG(OUTPUT, "Incorrect Channel count \n"); } break;
 		}
 
 
-		printf("\n");
-		printf("Signal to Noise Ratio                  : %0.2f dB\n", snr);
-		printf("Mean Square Error                      : %0.2f\n", mse);
-		printf("Peak-Signal to Noise Ratio (Max = 255) : %0.2f dB\n", psnr_255);
-		printf("Peak-Signal to Noise Ratio (Max)       : %0.2f dB\n", psnr_max);
-		printf("\n*************************************************\n");
+		LOG(OUTPUT, "\n");
+		LOG(OUTPUT, "Signal to Noise Ratio                  : %0.2f dB\n", snr);
+		LOG(OUTPUT, "Mean Square Error                      : %0.2f\n", mse);
+		LOG(OUTPUT, "Peak-Signal to Noise Ratio (Max = 255) : %0.2f dB\n", psnr_255);
+		LOG(OUTPUT, "Peak-Signal to Noise Ratio (Max)       : %0.2f dB\n", psnr_max);
+		LOG(OUTPUT, "\n*************************************************\n");
 
 		++channel_count;
 	}

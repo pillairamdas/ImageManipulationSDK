@@ -20,7 +20,7 @@ int main(int argc, char* argv[])
 
 	/* Check for application validity */
 	if(argc < 5) {
-		printf("\n\nUsage: %s <input image> <width> <height> <bits per pixel>\n\n", argv[0]);
+		LOG(ERROR, "Usage: %s <input image> <width> <height> <bits per pixel>\n\n", argv[0]);
 		goto EXIT;
 	}
 
@@ -28,7 +28,7 @@ int main(int argc, char* argv[])
 	/* Allocate memory for input image properties */
 	input_img = (tagImageProp *) malloc(sizeof(tagImageProp));
 	if(input_img == NULL) {
-		printf("[ERROR] %d: Memory unavailable!\n", __LINE__);
+		LOG(ERROR, "Memory unavailable!\n");
 		goto FREE_MEM;
 	}
 
@@ -44,7 +44,7 @@ int main(int argc, char* argv[])
 	input_img->size = input_img->pixel_count * input_img->bpp;
 	input_img->buffer = (uint8_t *) malloc(input_img->size);
 	if(input_img->buffer == NULL) {
-		printf("[ERROR] %d: Memory unavailable!\n", __LINE__);
+		LOG(ERROR, "Memory unavailable!\n");
 		goto FREE_MEM;	
 	}	
 
@@ -56,21 +56,21 @@ int main(int argc, char* argv[])
 
 	output_img_lightness = (tagImageProp *) malloc(sizeof(tagImageProp));
 	if(output_img_lightness == NULL) {
-		printf("[ERROR] %d: Memory unavailable!\n", __LINE__);
+		LOG(ERROR, "Memory unavailable!\n");
 		goto FREE_MEM;
 	}
 
 
 	output_img_average = (tagImageProp *) malloc(sizeof(tagImageProp));
 	if(output_img_average == NULL) {
-		printf("[ERROR] %d: Memory unavailable!\n", __LINE__);
+		LOG(ERROR, "Memory unavailable!\n");
 		goto FREE_MEM;
 	}
 
 
 	output_img_luminosity = (tagImageProp *) malloc(sizeof(tagImageProp));
 	if(output_img_luminosity == NULL) {
-		printf("[ERROR] %d: Memory unavailable!\n", __LINE__);
+		LOG(ERROR, "Memory unavailable!\n");
 		goto FREE_MEM;
 	}
 
@@ -91,18 +91,18 @@ int main(int argc, char* argv[])
 
 	output_img_luminosity->buffer = (uint8_t *) malloc(output_img_luminosity->size);
 	if(output_img_luminosity->buffer == NULL) {
-		printf("[ERROR] %d: Memory unavailable!\n", __LINE__);
+		LOG(ERROR, "Memory unavailable!\n");
 		goto FREE_MEM;
 	}
 
 	output_img_average->buffer = (uint8_t *) malloc(output_img_average->size);
 	if(output_img_average->buffer == NULL) {
-		printf("[ERROR] %d: Memory unavailable!\n", __LINE__);
+		LOG(ERROR, "Memory unavailable!\n");
 		goto FREE_MEM;
 	}
 	output_img_lightness->buffer = (uint8_t *) malloc(output_img_lightness->size);
 	if(output_img_lightness->buffer == NULL) {
-		printf("[ERROR] %d: Memory unavailable!\n", __LINE__);
+		LOG(ERROR, "Memory unavailable!\n");
 		goto FREE_MEM;
 	}
 

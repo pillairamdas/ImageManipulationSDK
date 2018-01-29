@@ -36,8 +36,6 @@ int create_gaussian_kernel(int **kernel, int window_size)
 	int      khoriz       = 0;
 	int      kvert        = 0;
 
-	printf("FUNCTION: %s\n", __func__);
-
 	for(i = -Nby2; i <= Nby2; i++) {
 		for(j = -Nby2; j <= Nby2; j++) {
 
@@ -108,17 +106,17 @@ void median_filtering(tagImageProp *input_img, tagImageProp *output_img, int win
 	/* Allocate memory for bins based on window size */
 	red_bin   = (int *) malloc(N * N * sizeof(int));
 	if(red_bin == NULL) {
-		printf("[ERROR] %d: Memory unavailable!\n", __LINE__);
+		LOG(ERROR, "Memory unavailable!\n");
 		goto FREE_MEM;
 	}
 	green_bin = (int *) malloc(N * N * sizeof(int));
 	if(green_bin == NULL) {
-		printf("[ERROR] %d: Memory unavailable!\n", __LINE__);
+		LOG(ERROR, "Memory unavailable!\n");
 		goto FREE_MEM;
 	}	
 	blue_bin  = (int *) malloc(N * N * sizeof(int));
 	if(blue_bin == NULL) {
-		printf("[ERROR] %d: Memory unavailable!\n", __LINE__);
+		LOG(ERROR, "Memory unavailable!\n");
 		goto FREE_MEM;
 	}	
 
@@ -228,7 +226,7 @@ tagStatus apply_filter(tagImageProp *input_img, tagImageProp *output_img, int wi
 
 
 	if((window_size > 11) || (window_size < 3) || ((window_size & 0x1) == 0)) {
-		printf("[ERROR]: %d is not a valid window size\n", window_size);
+		LOG(ERROR, "%d is not a valid window size\n", window_size);
 		return ERROR_WINDOW_SIZE;
 	}
 
@@ -242,13 +240,13 @@ tagStatus apply_filter(tagImageProp *input_img, tagImageProp *output_img, int wi
 
 		kernel = (int **) malloc(N * sizeof(int *));
 		if(kernel == NULL) {
-			printf("[ERROR] %d: Memory unavailable!\n", __LINE__);
+			LOG(ERROR, "Memory unavailable!\n");
 			goto FREE_MEM;
 		}
 		for(i = 0; i < N; ++i) {
 			kernel[i] = (int *) malloc(N * sizeof(int));
 			if(kernel[i] == NULL) {
-				printf("[ERROR] %d: Memory unavailable!\n", __LINE__);
+				LOG(ERROR, "Memory unavailable!\n");
 				goto FREE_MEM;
 			}			
 		}

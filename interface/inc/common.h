@@ -16,11 +16,11 @@
 #define DEBUG_LEVEL						1
 
 
-// typedef enum LOG_STATE {
-//     ERROR,
-//     OUTPUT,
-//     DEBUG
-// } LOG_STATE;
+typedef enum LOG_STATE {
+    ERROR,
+    OUTPUT,
+    DEBUG
+} LOG_STATE;
 
 
 // char LOG_STR[3][80] = {"ERROR", "OUTPUT", "DEBUG"};
@@ -29,11 +29,20 @@
 // #define LOG(X, ...)                 if(X == OUTPUT) { \
 //                                         printf(__VA_ARGS__); \
 //                                     } else { \
-//                                         if(X <= DEBUG_LEVEL) { \
-//                                             printf("\n[%s] %s: %s(%d): ", LOG_STR[(int)X], __FILE__, __func__, __LINE__); \
+//                                         if(X == ERROR) { \
+//                                             printf("\n[ERROR] %s: %s(%d): ", __FILE__, __func__, __LINE__); \
 //                                             printf(__VA_ARGS__); \
-//                                         } \
+//                                         } else { \
+//                                         	printf("\n[ERROR] %s: %s(%d): ", __FILE__, __func__, __LINE__); \
 //                                     }
+
+
+#define LOG(X, ...)						if(X == ERROR) { \
+											printf("\n[ERROR] %s: %s(%d): ", __FILE__, __func__, __LINE__); \
+										} else if(X == DEBUG) { \
+											printf("\n[DEBUG] %s: %s(%d): ", __FILE__, __func__, __LINE__); \
+										} \
+										printf(__VA_ARGS__);
 
 
 #define RGB_BITS_PER_PIXEL				3
