@@ -1,6 +1,6 @@
 Image Manipulation SDK
 
-This is an image manipulation software capable of below features:
+This is a RGB image manipulation software capable of below features:
 	- RGB to grayscale conversion by Lightness method, Average Method, 
 	  and Luminosity Method
 	- Image resizing using bilinear interpolation
