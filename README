@@ -1,1 +1,19 @@
 Image Manipulation SDK
+
+This is an image manipulation software capable of below features:
+	- RGB to grayscale conversion by Lightness method, Average Method, 
+	  and Luminosity Method
+	- Image resizing using bilinear interpolation
+	- Contrast enahcement of dull images by transfer function based 
+	  cumulative distribution histogram equalization. 
+	  Uniform histogram equalization is also supported.
+	- Oil painting effect
+	- Film effect
+	- Image denosing for impulse noise and random gaussian noise.
+
+Sample Usage:
+./oil_effect_app Barn.raw 400 300 3 5 64
+
+Installation:
+make clean && make
+

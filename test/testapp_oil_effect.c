@@ -12,7 +12,7 @@ int main(int argc, char *argv[])
 
 	/* Check for application validity */
 	if(argc < 7) {
-		LOG(ERROR, "Usage: %s <input image> <width> <height> <bits per pixel> <N value> <colors> \n\n", argv[0]);
+		LOG(ERROR, "Usage: %s <input image> <width> <height> <bits per pixel> <window size> <colors> \n\n", argv[0]);
 		goto EXIT;
 	}
 
