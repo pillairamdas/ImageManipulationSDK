@@ -14,7 +14,7 @@ void uniform_histogram_equalize(tagImageProp *input_img, tagImageProp *output_im
 	int32_t      iterator 		  	 = 0;
 	int32_t 	 loop_count			 = 0;
 	int32_t      channel_count       = 0;
-	uint8_t *buffer              = NULL;
+	uint8_t     *buffer              = NULL;
 	int32_t      tempval1            = 0;
 	
 	/* Gray to read histogram */

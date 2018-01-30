@@ -11,8 +11,8 @@ Description: Create a linear kernel of window size
 int32_t create_linear_kernel(int32_t **kernel, int32_t window_size) {
 
 	/* Loop Variables */
-	int32_t i    = 0;
-	int32_t j    = 0;
+	int32_t i          = 0;
+	int32_t j          = 0;
 
 	/* Sum of the kernel elements */
 	int32_t filter_sum = 0;
@@ -41,14 +41,14 @@ Description: Create a gaussian approximation kernel of window size
 */
 int32_t create_gaussian_kernel(int32_t **kernel, int32_t window_size) 
 {
-	int32_t Nby2 = window_size/2;
-	int32_t i    = 0;
-	int32_t j    = 0;
-	int32_t filter_sum = 0;
+	int32_t Nby2         = window_size/2;
+	int32_t i            = 0;
+	int32_t j            = 0;
+	int32_t filter_sum   = 0;
 	
 	/* Kernel coordinates */
-	int32_t      khoriz       = 0;
-	int32_t      kvert        = 0;
+	int32_t      khoriz  = 0;
+	int32_t      kvert   = 0;
 
 	for(i = -Nby2; i <= Nby2; i++) {
 		for(j = -Nby2; j <= Nby2; j++) {
@@ -95,7 +95,7 @@ void median_filtering(tagImageProp *input_img, tagImageProp *output_img, int32_t
 	int32_t      k           = 0;
 	int32_t      m           = 0;
 	int32_t      n           = 0;
-	uint8_t *buffer      = NULL;
+	uint8_t     *buffer      = NULL;
 
 	/* Window Size */
 	int32_t      N           = 0;
@@ -215,7 +215,7 @@ tagStatus apply_filter(tagImageProp *input_img, tagImageProp *output_img, int32_
 {
 	/* Temporary Variables */
 	int32_t      iterator 		  	= 0;
-	uint8_t *buffer             = NULL;
+	uint8_t     *buffer             = NULL;
 	int32_t 	 i                  = 0;
 	int32_t 	 j					= 0;
 	int32_t 	 m					= 0;

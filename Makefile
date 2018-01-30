@@ -12,16 +12,16 @@ REFLECT_APP         = ./bin/reflect_app
 
 CFLAGS=-g 
 
-COMMON_OBJS = 	utils.o \
-				interface.o \
-				format_conversion.o \
-				resize.o \
-				color_conversion.o \
-				oil_effect.o \
-				histogram_modification_transfer.o \
-				filtering.o \
-				histogram_equalization_uniform.o \
-				reflect.o
+COMMON_OBJS = 	      utils.o \
+				      interface.o \
+				      format_conversion.o \
+				      resize.o \
+				      color_conversion.o \
+				      oil_effect.o \
+				      histogram_modification_transfer.o \
+				      filtering.o \
+				      histogram_equalization_uniform.o \
+				      reflect.o
 				
 CONV_GRAY_OBJS   	= testapp_convert_gray.o
 CONV_CMY_OBJS    	= testapp_convert_cmy.o

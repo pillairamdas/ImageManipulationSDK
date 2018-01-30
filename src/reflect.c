@@ -12,7 +12,7 @@ void reflect_to_side(tagImageProp *input_img, tagImageProp *output_img)
 	int32_t      i              = 0;
 	int32_t      j              = 0;
 	int32_t      channel_count  = 0; 
-	uint8_t *buffer         = NULL;
+	uint8_t     *buffer         = NULL;
 
 
 	while(i < input_img->height) {

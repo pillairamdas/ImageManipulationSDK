@@ -94,7 +94,7 @@ int32_t int_cmp(const void *a, const void *b);
 /*
 Function   : index_max
 Input      : int32_t *arr - Input array
-			 int32_t size - Input array size
+	       int32_t size - Input array size
 Output     : Index of max value
 Description: Find the index of max element in the array
 */
@@ -104,7 +104,7 @@ int32_t index_max(int32_t *arr, int32_t size);
 /*
 Function   : get_median
 Input      : int32_t *arr - Input array
-                   int32_t size - Input array size
+             int32_t size - Input array size
 Output     : Median of the array
 Description: Find the median of array
 */
@@ -113,8 +113,8 @@ int32_t get_median(int32_t *arr, int32_t size);
 
 /*
 Function   : get_PSNR
-Input      : tagImageProp *input_img - Input image
-                   tagImageProp *filtered_img - Filtered image
+Input      : tagImageProp *input_img    - Input image
+             tagImageProp *filtered_img - Filtered image
 Output     : None
 Description: Print the PSNR statistics
 */

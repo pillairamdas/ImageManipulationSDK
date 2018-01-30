@@ -64,7 +64,7 @@ Function   : photo_effect
 Input      : tagImageProp *input_img  - Input image
              tagImageProp *output_img - Output Image
              long long int colors     - RGB Color palette levels
-             int32_t window_size          - Window size
+             int32_t window_size      - Window size
              tagEffects effects       - Effects to incorporate like OIL EFFECT, FILM EFFECT
 Output     : tagStatus
 Description: Bring in effects to the image.
@@ -133,8 +133,8 @@ FREE_MEM:
 
 /*
 Function   : contrast_manipulate
-Input      : tagImageProp *input_img  - Input image
-             tagImageProp *output_img - Output Image
+Input      : tagImageProp *input_img       - Input image
+             tagImageProp *output_img      - Output Image
              tagHistEqualizeMethods method - Histogram equalization methods
 Output     : None
 Description: Bring in effects to the image.
@@ -155,8 +155,8 @@ tagStatus contrast_manipulate(tagImageProp *input_img, tagImageProp *output_img,
 
 /*
 Function   : remove_image_noise
-Input      : tagImageProp *input_img  - Input image
-             tagImageProp *output_img - Output Image
+Input      : tagImageProp *input_img       - Input image
+             tagImageProp *output_img      - Output Image
              tagHistEqualizeMethods method - Histogram equalization methods
 Output     : tagStatus
 Description: Bring in effects to the image.

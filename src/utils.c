@@ -76,7 +76,7 @@ Description: Read contents of file to the buffer
 */
 int32_t read_from_file(uint8_t *buf, int32_t size, char *str)
 {
-	int32_t in_fd = -1;
+	int32_t in_fd  = -1;
 	int32_t status = 0;
 
 	/* Open the file for reading */ 
@@ -140,6 +140,7 @@ int32_t int_cmp(const void *a, const void *b)
 { 
     const int32_t *ia = (const int32_t *)a; // casting pointer types 
     const int32_t *ib = (const int32_t *)b;
+
     return *ia  - *ib; 
 	/* integer comparison: returns negative if b > a 
 	and positive if a > b */ 
@@ -154,9 +155,11 @@ Output     : Index of max value
 Description: Find the index of max element in the array
 */
 int32_t index_max(int32_t *arr, int32_t size) {
-	int32_t i = 0;
+	
+	int32_t i       = 0;
 	int32_t max_pos = 0;
-	int32_t max = 0;
+	int32_t max     = 0;
+
 	for(i = 0; i<size; i++) {
 		if(max < arr[i]) {
 			max = arr[i];
@@ -191,17 +194,18 @@ Description: Print the PSNR statistics
 */
 void get_PSNR(tagImageProp *input_img, tagImageProp *filtered_img)
 {
-	int32_t channel_count = 0;
-	int32_t iterator      = 0;
-	long long int noise         = 0;
-	float mse         = 0.0;
-	long long int   signal      = 0;
-	float snr         = 0.0;
-	float psnr_255    = 0.0;
-	float psnr_max    = 0.0;
-	uint8_t* inbuffer   = NULL;
-	uint8_t* outbuffer   = NULL;
-	int32_t   max_intensity = 0;
+	int32_t        channel_count  = 0;
+	int32_t        iterator       = 0;
+	long long int  noise          = 0;
+	float          mse            = 0.0;
+	long long int  signal         = 0;
+	float          snr            = 0.0;
+	float          psnr_255       = 0.0;
+	float          psnr_max       = 0.0;
+	uint8_t       *inbuffer       = NULL;
+	uint8_t       *outbuffer      = NULL;
+	int32_t        max_intensity  = 0;
+
 
 	while(channel_count < input_img->bpp) {
 

@@ -18,16 +18,16 @@ void histogram_modify(tagImageProp *input_img, tagImageProp *output_img, tagHist
 	int32_t      iterator               = 0;
 	int32_t      channel_count          = 0;
 	int32_t      tempval                = 0;
-	uint8_t *buffer                 = NULL;
+	uint8_t     *buffer                 = NULL;
 
 	/* Array to store histogram values */
 	int32_t 	 gray_level_bin[RGB_BITS_PER_PIXEL][RGB_PIXEL_LEVELS] = {0};
 
 	/* Array to store the probability table */
-	float    prob_bins[RGB_PIXEL_LEVELS] 	= {0.0};
+	float    prob_bins[RGB_PIXEL_LEVELS] 	    = {0.0};
 
 	/* Array to store the cdf values  */
-	float    cdf_bins[RGB_PIXEL_LEVELS]	 	= {0.0};
+	float    cdf_bins[RGB_PIXEL_LEVELS]	 	    = {0.0};
 
 	/* Generic custom decided transfer function */
 	float    transfer_func          			= 0.0;

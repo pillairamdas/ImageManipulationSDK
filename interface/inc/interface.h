@@ -70,8 +70,8 @@ tagStatus photo_effect(tagImageProp *input_img, tagImageProp *output_img, long l
 
 /*
 Function   : contrast_manipulate
-Input      : tagImageProp *input_img  - Input image
-             tagImageProp *output_img - Output Image
+Input      : tagImageProp *input_img       - Input image
+             tagImageProp *output_img      - Output Image
              tagHistEqualizeMethods method - Histogram equalization methods
 Output     : None
 Description: Bring in effects to the image.
@@ -80,9 +80,9 @@ tagStatus contrast_manipulate(tagImageProp *input_img, tagImageProp *output_img,
 
 /*
 Function   : contrast_manipulate
-Input      : tagImageProp *input_img  - Input image
-             tagImageProp *output_img - Output Image
-             int32_t window_size      - Window Size
+Input      : tagImageProp *input_img       - Input image
+             tagImageProp *output_img      - Output Image
+             int32_t window_size           - Window Size
              tagNoiseRemovalMethods method - Noise Removal methods
 Output     : tagStatus
 Description: Bring in effects to the image.

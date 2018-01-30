@@ -38,7 +38,7 @@ int32_t create_gaussian_kernel(int32_t **kernel, int32_t window_size);
 Function   : median_filtering
 Input      : tagImageProp *input_img  - Input image
              tagImageProp *output_img - Output Image
-             int32_t window_size          - Size of the window
+             int32_t window_size      - Size of the window
 Output     : ERROR_NONE on success
 			 ERROR_WINDOW_SIZE on incorrect window size
 Description: Perform median filtering on the input image
@@ -50,7 +50,7 @@ void median_filtering(tagImageProp *input_img, tagImageProp *output_img, int32_t
 Function   : gaussian_filtering 
 Input      : tagImageProp *input_img  - Input image
              tagImageProp *output_img - Output Image
-             int32_t window_size          - dimension of window
+             int32_t window_size      - dimension of window
 Output     : None
 Description: Apply gaussian filter on the input image
 */

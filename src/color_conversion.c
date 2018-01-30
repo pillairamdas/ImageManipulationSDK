@@ -18,7 +18,7 @@ void fetch_color_levels(tagImageProp *input_img, int32_t **color_level, int32_t 
 	int32_t 	 j             	= 0; 
 	int32_t 	 k             	= 0; 
 	int32_t 	 tempval       	= 0; 
-	uint8_t *buffer   		= NULL;
+	uint8_t     *buffer   		= NULL;
 
 	/* Stores the histogram for input image for a particular channel */
 	int32_t 	 gray_bin[RGB_PIXEL_LEVELS] 	= {0};

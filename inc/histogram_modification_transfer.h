@@ -18,8 +18,8 @@
 
 /*
 Function   : histogram_modify 
-Input      : tagImageProp *input_img  - Input image
-             tagImageProp *output_img - Output Image
+Input      : tagImageProp *input_img     - Input image
+             tagImageProp *output_img    - Output Image
              tagHistModifications method - Operation: 1. Equalize histogram
              										  2. Modify histogram
 Output     : None
