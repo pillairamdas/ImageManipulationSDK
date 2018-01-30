@@ -4,37 +4,37 @@
 Function   : oil_effect
 Input      : tagImageProp *input_img  - Input image
              tagImageProp *output_img - Output Image
-             int window_size          - Window size
+             int32_t window_size          - Window size
 Output     : tagStatus - Error Status for the function
 Description: Get oil effect on the input image
 */
-tagStatus oil_effect(tagImageProp *input_img, tagImageProp *output_img, int window_size)
+tagStatus oil_effect(tagImageProp *input_img, tagImageProp *output_img, int32_t window_size)
 {
 
 	/* Temporary Variables */
-	int      i                              = 0;
-	int      j                              = 0;
-	int      iterator 		  	            = 0;
+	int32_t      i                              = 0;
+	int32_t      j                              = 0;
+	int32_t      iterator 		  	            = 0;
 	uint8_t *buffer             			= NULL;
 
 	/* Window size */
-	int      N                  			= 0;
+	int32_t      N                  			= 0;
 
 	/* Half of window size for readability */
-	int      Nby2							= 0;
+	int32_t      Nby2							= 0;
 
 	/* Indices of window */
-	int      window_horiz       			= 0;
-	int      window_vert        			= 0;
+	int32_t      window_horiz       			= 0;
+	int32_t      window_vert        			= 0;
 
 	/* Indices of pixel of input image */
-	int      horiz              			= 0;
-	int      vert               			= 0;
+	int32_t      horiz              			= 0;
+	int32_t      vert               			= 0;
 
 	/* Color bins to check similarity in pixel color levels in window */
-	int 	 red_bin[RGB_PIXEL_LEVELS]      = {0};
-	int      blue_bin[RGB_PIXEL_LEVELS]     = {0};
-	int      green_bin[RGB_PIXEL_LEVELS]    = {0};
+	int32_t 	 red_bin[RGB_PIXEL_LEVELS]      = {0};
+	int32_t      blue_bin[RGB_PIXEL_LEVELS]     = {0};
+	int32_t      green_bin[RGB_PIXEL_LEVELS]    = {0};
 
 	if((window_size > 11) || (window_size < 3) || ((window_size & 0x1) == 0)) {
 		LOG(ERROR, "%d is not a valid window size\n", window_size);
@@ -55,9 +55,9 @@ tagStatus oil_effect(tagImageProp *input_img, tagImageProp *output_img, int wind
 		vert  = iterator / output_img->width;
 
 		/* Clear the color bins for each pixel */
-		memset(red_bin, 0, RGB_PIXEL_LEVELS * sizeof(int));
-		memset(blue_bin, 0, RGB_PIXEL_LEVELS * sizeof(int));
-		memset(green_bin, 0, RGB_PIXEL_LEVELS * sizeof(int));
+		memset(red_bin, 0, RGB_PIXEL_LEVELS * sizeof(int32_t));
+		memset(blue_bin, 0, RGB_PIXEL_LEVELS * sizeof(int32_t));
+		memset(green_bin, 0, RGB_PIXEL_LEVELS * sizeof(int32_t));
 
 		/* Iterate over the window elements */ 
 		for(i = -Nby2; i <= Nby2; i++) {

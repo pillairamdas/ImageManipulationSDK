@@ -48,12 +48,14 @@ Function   : change_color_palette
 Input      : tagImageProp *input_img  - Input image
              tagImageProp *output_img - Output Image
              long long int colors     - RGB Color palette levels
-Output     : None
+Output     : tagStatus
 Description: Change the color palette of the image.
 */
-void change_color_palette(tagImageProp *input_img, tagImageProp *output_img, long long int colors) 
+tagStatus change_color_palette(tagImageProp *input_img, tagImageProp *output_img, long long int colors) 
 {
-	convert_color(input_img, output_img, colors);
+	tagStatus status = ERROR_NONE;
+	status = convert_color(input_img, output_img, colors);
+	return status;
 }
 
 
@@ -62,16 +64,17 @@ Function   : photo_effect
 Input      : tagImageProp *input_img  - Input image
              tagImageProp *output_img - Output Image
              long long int colors     - RGB Color palette levels
-             int window_size          - Window size
+             int32_t window_size          - Window size
              tagEffects effects       - Effects to incorporate like OIL EFFECT, FILM EFFECT
-Output     : None
+Output     : tagStatus
 Description: Bring in effects to the image.
 */
-void photo_effect(tagImageProp *input_img, tagImageProp *output_img, long long int colors, int window_size, tagEffects effects)
+tagStatus photo_effect(tagImageProp *input_img, tagImageProp *output_img, long long int colors, int32_t window_size, tagEffects effects)
 {
+	tagStatus status = ERROR_NONE;
 	/* if the user wants OIL EFFECT on the input image */
 	if(effects == EFFECT_OIL_EFFECT)
-		oil_effect(input_img, output_img, window_size);
+		status = oil_effect(input_img, output_img, window_size);
 	else if(effects == EFFECT_FILM_EFFECT) {
 
 		tagImageProp *reflect_out = (tagImageProp *)malloc(sizeof(tagImageProp));
@@ -123,6 +126,8 @@ FREE_MEM:
 		}
 
 	}
+
+	return status;
 }
 
 
@@ -153,19 +158,21 @@ Function   : remove_image_noise
 Input      : tagImageProp *input_img  - Input image
              tagImageProp *output_img - Output Image
              tagHistEqualizeMethods method - Histogram equalization methods
-Output     : None
+Output     : tagStatus
 Description: Bring in effects to the image.
 */
-void remove_image_noise(tagImageProp *input_img, tagImageProp *output_img, int window_size, tagNoiseRemovalMethods method)
+tagStatus remove_image_noise(tagImageProp *input_img, tagImageProp *output_img, int32_t window_size, tagNoiseRemovalMethods method)
 {
+	tagStatus status = ERROR_NONE;
 	if(method == NOISE_REMOVE_MEDIAN_FILTER) {
-		apply_filter(input_img, output_img, window_size, FILTER_MEDIAN);
+		status = apply_filter(input_img, output_img, window_size, FILTER_MEDIAN);
 	} else if(method == NOISE_REMOVE_GAUSSIAN_FILTER) {
-		apply_filter(input_img, output_img, window_size, FILTER_GAUSSIAN);
+		status = apply_filter(input_img, output_img, window_size, FILTER_GAUSSIAN);
 	} else if(method == NOISE_REMOVE_LINEAR_FILTER) {
-		apply_filter(input_img, output_img, window_size, FILTER_LINEAR);
+		status = apply_filter(input_img, output_img, window_size, FILTER_LINEAR);
 	}
 
+	return status;
 }
 
 

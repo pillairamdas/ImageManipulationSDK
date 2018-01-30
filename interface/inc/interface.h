@@ -49,10 +49,10 @@ Function   : change_color_palette
 Input      : tagImageProp *input_img  - Input image
              tagImageProp *output_img - Output Image
              long long int colors     - Number of colors
-Output     : None
+Output     : tagStatus
 Description: Change the color pallete
 */
-void change_color_palette(tagImageProp *input_img, tagImageProp *output_img, long long int colors);
+tagStatus change_color_palette(tagImageProp *input_img, tagImageProp *output_img, long long int colors);
 
 
 /*
@@ -60,12 +60,12 @@ Function   : photo_effect
 Input      : tagImageProp *input_img  - Input image
              tagImageProp *output_img - Output Image
              long long int colors     - RGB Color palette levels
-             int window_size          - Window size
+             int32_t window_size      - Window size
              tagEffects effects       - Effects to incorporate like OIL EFFECT, FILM EFFECT
-Output     : None
+Output     : tagStatus
 Description: Bring in effects to the image.
 */
-void photo_effect(tagImageProp *input_img, tagImageProp *output_img, long long int colors, int window_size, tagEffects effects);
+tagStatus photo_effect(tagImageProp *input_img, tagImageProp *output_img, long long int colors, int32_t window_size, tagEffects effects);
 
 
 /*
@@ -82,11 +82,12 @@ tagStatus contrast_manipulate(tagImageProp *input_img, tagImageProp *output_img,
 Function   : contrast_manipulate
 Input      : tagImageProp *input_img  - Input image
              tagImageProp *output_img - Output Image
-             tagHistEqualizeMethods method - Histogram equalization methods
-Output     : None
+             int32_t window_size      - Window Size
+             tagNoiseRemovalMethods method - Noise Removal methods
+Output     : tagStatus
 Description: Bring in effects to the image.
 */
-void remove_image_noise(tagImageProp *input_img, tagImageProp *output_img, int window_size, tagNoiseRemovalMethods method);
+tagStatus remove_image_noise(tagImageProp *input_img, tagImageProp *output_img, int32_t window_size, tagNoiseRemovalMethods method);
 
 /*
 Function   : print_psnr

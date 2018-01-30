@@ -23,20 +23,6 @@ typedef enum LOG_STATE {
 } LOG_STATE;
 
 
-// char LOG_STR[3][80] = {"ERROR", "OUTPUT", "DEBUG"};
-
-
-// #define LOG(X, ...)                 if(X == OUTPUT) { \
-//                                         printf(__VA_ARGS__); \
-//                                     } else { \
-//                                         if(X == ERROR) { \
-//                                             printf("\n[ERROR] %s: %s(%d): ", __FILE__, __func__, __LINE__); \
-//                                             printf(__VA_ARGS__); \
-//                                         } else { \
-//                                         	printf("\n[ERROR] %s: %s(%d): ", __FILE__, __func__, __LINE__); \
-//                                     }
-
-
 #define LOG(X, ...)						if(X == ERROR) { \
 											printf("\n[ERROR] %s: %s(%d): ", __FILE__, __func__, __LINE__); \
 										} else if(X == DEBUG) { \

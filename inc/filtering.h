@@ -17,43 +17,43 @@
 
 /*
 Function   : create_linear_kernel 
-Input      : int *kernel - Kernel to be filled
-             int window_size - Window size;
-Output     : int filter_sum  - Normalization factor
+Input      : int32_t **kernel    - Kernel to be filled
+             int32_t window_size - Window size;
+Output     : int32_t filter_sum  - Normalization factor
 Description: Create a linear kernel of window size
 */
-int create_linear_kernel(int **kernel, int window_size);
+int32_t create_linear_kernel(int32_t **kernel, int32_t window_size);
 
 /*
 Function   : create_gaussian_kernel
-Input      : int *kernel - Kernel to be filled
-             int window_size - Window size;
-Output     : int filter_sum  - Normalization factor
+Input      : int32_t **kernel    - Kernel to be filled
+             int32_t window_size - Window size;
+Output     : int32_t filter_sum  - Normalization factor
 Description: Create a gaussian approximation kernel of window size
 */
-int create_gaussian_kernel(int **kernel, int window_size);
+int32_t create_gaussian_kernel(int32_t **kernel, int32_t window_size);
 
 
 /*
 Function   : median_filtering
 Input      : tagImageProp *input_img  - Input image
              tagImageProp *output_img - Output Image
-             int window_size          - Size of the window
+             int32_t window_size          - Size of the window
 Output     : ERROR_NONE on success
 			 ERROR_WINDOW_SIZE on incorrect window size
 Description: Perform median filtering on the input image
 */
-void median_filtering(tagImageProp *input_img, tagImageProp *output_img, int window_size);
+void median_filtering(tagImageProp *input_img, tagImageProp *output_img, int32_t window_size);
 
 
 /*
 Function   : gaussian_filtering 
 Input      : tagImageProp *input_img  - Input image
              tagImageProp *output_img - Output Image
-             int window_size          - dimension of window
+             int32_t window_size          - dimension of window
 Output     : None
 Description: Apply gaussian filter on the input image
 */
-tagStatus apply_filter(tagImageProp *input_img, tagImageProp *output_img, int window_size, tagFilterType filter);
+tagStatus apply_filter(tagImageProp *input_img, tagImageProp *output_img, int32_t window_size, tagFilterType filter);
 
 #endif // #ifndef __FILTERING_H__

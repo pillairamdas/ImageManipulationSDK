@@ -15,6 +15,14 @@
 #include "common.h"
 #include "utils.h"
 
+
+/*
+Function   : uniform_histogram_equalize 
+Input      : tagImageProp *input_img  - Input image
+             tagImageProp *output_img - Output Image
+Output     : None
+Description: Apply uniform histogram equalization on the image.
+*/
 void uniform_histogram_equalize(tagImageProp *input_img, tagImageProp *output_img);
 
 #endif // #ifndef __HISTOGRAM_EQUALIZATION_UNIFORM_H__

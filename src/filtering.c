@@ -1,17 +1,24 @@
 #include "filtering.h"
 
 
-int create_linear_kernel(int **kernel, int window_size) {
+/*
+Function   : create_linear_kernel 
+Input      : int32_t **kernel    - Kernel to be filled
+             int32_t window_size - Window size;
+Output     : int32_t filter_sum  - Normalization factor
+Description: Create a linear kernel of window size
+*/
+int32_t create_linear_kernel(int32_t **kernel, int32_t window_size) {
 
 	/* Loop Variables */
-	int i    = 0;
-	int j    = 0;
+	int32_t i    = 0;
+	int32_t j    = 0;
 
 	/* Sum of the kernel elements */
-	int filter_sum = 0;
+	int32_t filter_sum = 0;
 
 	/* window_size/2 for readability */
-	int Nby2 = window_size/2;
+	int32_t Nby2 = window_size/2;
 
 	for(i = 0; i < window_size; i++) {
 		for(j = 0; j < window_size; j++) {
@@ -25,16 +32,23 @@ int create_linear_kernel(int **kernel, int window_size) {
 }
 
 
-int create_gaussian_kernel(int **kernel, int window_size) 
+/*
+Function   : create_gaussian_kernel
+Input      : int32_t **kernel    - Kernel to be filled
+             int32_t window_size - Window size;
+Output     : int32_t filter_sum  - Normalization factor
+Description: Create a gaussian approximation kernel of window size
+*/
+int32_t create_gaussian_kernel(int32_t **kernel, int32_t window_size) 
 {
-	int Nby2 = window_size/2;
-	int i    = 0;
-	int j    = 0;
-	int filter_sum = 0;
+	int32_t Nby2 = window_size/2;
+	int32_t i    = 0;
+	int32_t j    = 0;
+	int32_t filter_sum = 0;
 	
 	/* Kernel coordinates */
-	int      khoriz       = 0;
-	int      kvert        = 0;
+	int32_t      khoriz       = 0;
+	int32_t      kvert        = 0;
 
 	for(i = -Nby2; i <= Nby2; i++) {
 		for(j = -Nby2; j <= Nby2; j++) {
@@ -67,36 +81,36 @@ int create_gaussian_kernel(int **kernel, int window_size)
 Function   : median_filtering
 Input      : tagImageProp *input_img  - Input image
              tagImageProp *output_img - Output Image
-             int window_size          - Size of the window
+             int32_t window_size          - Size of the window
 Output     : ERROR_NONE on success
 			 ERROR_WINDOW_SIZE on incorrect window size
 Description: Perform median filtering on the input image
 */
-void median_filtering(tagImageProp *input_img, tagImageProp *output_img, int window_size)
+void median_filtering(tagImageProp *input_img, tagImageProp *output_img, int32_t window_size)
 {
 	/* Temporary Variables */
-	int      iterator    = 0;
-	int      i           = 0;
-	int      j           = 0;
-	int      k           = 0;
-	int      m           = 0;
-	int      n           = 0;
+	int32_t      iterator    = 0;
+	int32_t      i           = 0;
+	int32_t      j           = 0;
+	int32_t      k           = 0;
+	int32_t      m           = 0;
+	int32_t      n           = 0;
 	uint8_t *buffer      = NULL;
 
 	/* Window Size */
-	int      N           = 0;
+	int32_t      N           = 0;
 
 	/* N/2 for readability */
-	int      Nby2		 = 0;
+	int32_t      Nby2		 = 0;
 
 	/* Pixel coordinates */
-	int      horiz       = 0;
-	int      vert        = 0;
+	int32_t      horiz       = 0;
+	int32_t      vert        = 0;
 
 	/* Dynamic bins to store the window pixel intensities */
-	int      *red_bin    = NULL;
-	int      *green_bin  = NULL;
-	int      *blue_bin   = NULL;
+	int32_t      *red_bin    = NULL;
+	int32_t      *green_bin  = NULL;
+	int32_t      *blue_bin   = NULL;
 
 
 	/* Store window size and compute Nby2 */ 
@@ -104,17 +118,17 @@ void median_filtering(tagImageProp *input_img, tagImageProp *output_img, int win
 	Nby2 = N / 2;
 
 	/* Allocate memory for bins based on window size */
-	red_bin   = (int *) malloc(N * N * sizeof(int));
+	red_bin   = (int32_t *) malloc(N * N * sizeof(int32_t));
 	if(red_bin == NULL) {
 		LOG(ERROR, "Memory unavailable!\n");
 		goto FREE_MEM;
 	}
-	green_bin = (int *) malloc(N * N * sizeof(int));
+	green_bin = (int32_t *) malloc(N * N * sizeof(int32_t));
 	if(green_bin == NULL) {
 		LOG(ERROR, "Memory unavailable!\n");
 		goto FREE_MEM;
 	}	
-	blue_bin  = (int *) malloc(N * N * sizeof(int));
+	blue_bin  = (int32_t *) malloc(N * N * sizeof(int32_t));
 	if(blue_bin == NULL) {
 		LOG(ERROR, "Memory unavailable!\n");
 		goto FREE_MEM;
@@ -129,9 +143,9 @@ void median_filtering(tagImageProp *input_img, tagImageProp *output_img, int win
 		vert  = iterator / input_img->width;
 
 		/* Reset the color bins for each pixel */
-		memset(red_bin, 0x0, N * N * sizeof(int));
-		memset(green_bin, 0x0, N * N * sizeof(int));
-		memset(blue_bin, 0x0, N * N * sizeof(int));
+		memset(red_bin, 0x0, N * N * sizeof(int32_t));
+		memset(green_bin, 0x0, N * N * sizeof(int32_t));
+		memset(blue_bin, 0x0, N * N * sizeof(int32_t));
 	
 		/* Iterate over the window */
 		k = 0;
@@ -193,35 +207,35 @@ FREE_MEM:
 Function   : gaussian_filtering 
 Input      : tagImageProp *input_img  - Input image
              tagImageProp *output_img - Output Image
-             int window_size          - dimension of window
+             int32_t window_size          - dimension of window
 Output     : None
 Description: Apply gaussian filter on the input image
 */
-tagStatus apply_filter(tagImageProp *input_img, tagImageProp *output_img, int window_size, tagFilterType filter)
+tagStatus apply_filter(tagImageProp *input_img, tagImageProp *output_img, int32_t window_size, tagFilterType filter)
 {
 	/* Temporary Variables */
-	int      iterator 		  	= 0;
+	int32_t      iterator 		  	= 0;
 	uint8_t *buffer             = NULL;
-	int 	 i                  = 0;
-	int 	 j					= 0;
-	int 	 m					= 0;
-	int 	 n					= 0;			
+	int32_t 	 i                  = 0;
+	int32_t 	 j					= 0;
+	int32_t 	 m					= 0;
+	int32_t 	 n					= 0;			
 
 	/* Window size */
-	int      N             	 	= 0;
+	int32_t      N             	 	= 0;
 
 	/* N/2 for readability */
-	int      Nby2				= 0;
+	int32_t      Nby2				= 0;
 
 	/* Pixel 2D corrdinates */
-	int      horiz              = 0;
-	int      vert               = 0;
+	int32_t      horiz              = 0;
+	int32_t      vert               = 0;
 
 	/* Kernel value at the coordinate */
-	int    **kernel             = 0;
-	int      filter_sum         = 0;
-	int      row_sum            = 0;
-	int 	 sum_channel_val[RGB_BITS_PER_PIXEL] = {0};
+	int32_t    **kernel             = 0;
+	int32_t      filter_sum         = 0;
+	int32_t      row_sum            = 0;
+	int32_t 	 sum_channel_val[RGB_BITS_PER_PIXEL] = {0};
 
 
 
@@ -238,13 +252,13 @@ tagStatus apply_filter(tagImageProp *input_img, tagImageProp *output_img, int wi
 		N = window_size;
 		Nby2 = N/2;
 
-		kernel = (int **) malloc(N * sizeof(int *));
+		kernel = (int32_t **) malloc(N * sizeof(int32_t *));
 		if(kernel == NULL) {
 			LOG(ERROR, "Memory unavailable!\n");
 			goto FREE_MEM;
 		}
 		for(i = 0; i < N; ++i) {
-			kernel[i] = (int *) malloc(N * sizeof(int));
+			kernel[i] = (int32_t *) malloc(N * sizeof(int32_t));
 			if(kernel[i] == NULL) {
 				LOG(ERROR, "Memory unavailable!\n");
 				goto FREE_MEM;
@@ -269,7 +283,7 @@ tagStatus apply_filter(tagImageProp *input_img, tagImageProp *output_img, int wi
 			vert  = iterator / input_img->width;
 
 			/* Reset sum channel array for each pixel */
-			memset(sum_channel_val, 0, RGB_BITS_PER_PIXEL * sizeof(int));
+			memset(sum_channel_val, 0, RGB_BITS_PER_PIXEL * sizeof(int32_t));
 
 			/* Iterate over the window */
 			for(i = -Nby2; i <= Nby2; i++) {

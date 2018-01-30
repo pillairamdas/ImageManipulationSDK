@@ -2,13 +2,12 @@
 
 int main(int argc, char *argv[])
 {
-
-	int 	 status 			= 0;
-	tagImageProp *input_img          = NULL;	
-	tagImageProp *output_img         = NULL;
-	tagImageProp *col_conv_img       = NULL;
+	tagImageProp *input_img     = NULL;	
+	tagImageProp *output_img    = NULL;
+	tagImageProp *col_conv_img  = NULL;
 	long long int colors        = 0;
-	int      window_size        = 0;
+	int           window_size   = 0;
+	tagStatus     status        = ERROR_NONE;
 
 	/* Check for application validity */
 	if(argc < 7) {
@@ -80,9 +79,15 @@ int main(int argc, char *argv[])
 		goto FREE_MEM;
 	}
 
-	change_color_palette(input_img, col_conv_img, colors);
+	status = change_color_palette(input_img, col_conv_img, colors);
+	if(status != ERROR_NONE) {
+		goto FREE_MEM;
+	}
 
-	photo_effect(col_conv_img, output_img, colors, window_size, EFFECT_OIL_EFFECT);
+	status = photo_effect(col_conv_img, output_img, colors, window_size, EFFECT_OIL_EFFECT);
+	if(status != ERROR_NONE) {
+		goto FREE_MEM;
+	}
 
 	if((dump_to_file(output_img->buffer, output_img->size, "oil_effect.raw")) != 0) {
 		goto FREE_MEM;

@@ -1,16 +1,15 @@
 CC = ${CROSS_COMPILE}gcc
 
-CONV_GRAY_APP   =./bin/conv_gray_app
-CONV_CMY_APP    =./bin/conv_cmy_app
-RESIZE_APP      =./bin/resize_app
-COLOR_CONV_APP  =./bin/color_conv_app
-OIL_EFFECT_APP  = ./bin/oil_effect_app
-CONTRAST_MANIP_APP = ./bin/contrast_manip_app
-DENOISE_APP     = ./bin/denoise_app
-FILM_EFFECT_APP = ./bin/film_effect_app
+CONV_GRAY_APP   	= ./bin/conv_gray_app
+CONV_CMY_APP    	= ./bin/conv_cmy_app
+RESIZE_APP      	= ./bin/resize_app
+COLOR_CONV_APP  	= ./bin/color_conv_app
+OIL_EFFECT_APP  	= ./bin/oil_effect_app
+CONTRAST_MANIP_APP  = ./bin/contrast_manip_app
+DENOISE_APP     	= ./bin/denoise_app
+FILM_EFFECT_APP 	= ./bin/film_effect_app
+REFLECT_APP         = ./bin/reflect_app
 
-
-#Add -DPRINT_MATRIX to CFLAGS to print input file matrix on stdout
 CFLAGS=-g 
 
 COMMON_OBJS = 	utils.o \
@@ -24,14 +23,15 @@ COMMON_OBJS = 	utils.o \
 				histogram_equalization_uniform.o \
 				reflect.o
 				
-CONV_GRAY_OBJS   = testapp_convert_gray.o
-CONV_CMY_OBJS    = testapp_convert_cmy.o
-RESIZE_OBJS      = testapp_resize.o
-COLOR_CONV_OBJS  = testapp_color_palette_conv.o
-OIL_EFFECT_OBJS  = testapp_oil_effect.o
+CONV_GRAY_OBJS   	= testapp_convert_gray.o
+CONV_CMY_OBJS    	= testapp_convert_cmy.o
+RESIZE_OBJS      	= testapp_resize.o
+COLOR_CONV_OBJS  	= testapp_color_palette_conv.o
+OIL_EFFECT_OBJS  	= testapp_oil_effect.o
 CONTRAST_MANIP_OBJS = testapp_contrast_manipulation.o
-DENOISE_OBJS    = testapp_denoise.o
-FILM_EFFECT_OBJS = testapp_film_effect.o
+DENOISE_OBJS    	= testapp_denoise.o
+FILM_EFFECT_OBJS 	= testapp_film_effect.o
+REFLECT_OBJS        = testapp_reflect.o
 
 INCLUDE=-I ./inc -I ./interface/inc
 
@@ -42,15 +42,17 @@ LDFLAGS= -lm
 vpath %.c ./src ./interface/src ./test 
 
 
-all: ${CONV_GRAY_APP} ${CONV_CMY_APP} ${RESIZE_APP} ${COLOR_CONV_APP} ${OIL_EFFECT_APP} ${CONTRAST_MANIP_APP} ${DENOISE_APP} ${FILM_EFFECT_APP}
-conv_gray:   ${CONV_GRAY_APP}
-conv_cmy:    ${CONV_CMY_APP}
-resize:      ${RESIZE_APP}
-color_conv:  ${COLOR_CONV_APP}
-oil_effect:  ${OIL_EFFECT_APP}
+all: ${CONV_GRAY_APP} ${CONV_CMY_APP} ${RESIZE_APP} ${COLOR_CONV_APP} ${OIL_EFFECT_APP} \
+	 ${CONTRAST_MANIP_APP} ${DENOISE_APP} ${FILM_EFFECT_APP} ${REFLECT_APP}
+conv_gray:   		   ${CONV_GRAY_APP}
+conv_cmy:    		   ${CONV_CMY_APP}
+resize:      		   ${RESIZE_APP}
+color_conv:  		   ${COLOR_CONV_APP}
+oil_effect:  		   ${OIL_EFFECT_APP}
 contrast_manipulation: ${CONTRAST_MANIP_APP}
-denoise:     ${DENOISE_APP}
-film_effect: ${FILM_EFFECT_APP}
+denoise:               ${DENOISE_APP}
+film_effect:           ${FILM_EFFECT_APP}
+reflect:			   ${REFLECT_APP}
 
 .c.o:
 	@${CC} ${CFLAGS} ${INCLUDE} -c $< ${LIB} ${LDFLAGS} -o $@
@@ -88,6 +90,9 @@ ${FILM_EFFECT_APP}:${COMMON_OBJS} ${FILM_EFFECT_OBJS}
 	@${CC} ${COMMON_OBJS} ${FILM_EFFECT_OBJS} ${CFLAGS} ${INCLUDE} -o $@ $(LIB) ${LDFLAGS}
 	@echo [CC] $@
 
+${REFLECT_APP}:${COMMON_OBJS} ${REFLECT_OBJS}
+	@${CC} ${COMMON_OBJS} ${REFLECT_OBJS} ${CFLAGS} ${INCLUDE} -o $@ $(LIB) ${LDFLAGS}
+	@echo [CC] $@
 
 clean:
 	find . -type f | xargs touch
@@ -108,5 +113,6 @@ clean:
 	@echo [RM] ${DENOISE_APP}
 	@rm -rf ${FILM_EFFECT_APP}
 	@echo [RM] ${FILM_EFFECT_APP}
-
+	@rm -rf ${REFLECT_APP}
+	@echo [RM] ${REFLECT_APP}
 

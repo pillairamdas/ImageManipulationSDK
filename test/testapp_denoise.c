@@ -2,13 +2,12 @@
 
 int main(int argc, char *argv[])
 {
-
-	int 	       status 		= 0;
-	tagImageProp  *input_img    = NULL;	
-	tagImageProp  *original_img    = NULL;	
+	tagImageProp  *input_img          = NULL;	
+	tagImageProp  *original_img       = NULL;	
 	tagImageProp  *output_img_median  = NULL;	
-	tagImageProp  *output_img   = NULL;
-	int            window_size  = 0;
+	tagImageProp  *output_img         = NULL;
+	int            window_size        = 0;
+	tagStatus      status             = ERROR_NONE;
 
 	/* Check for application validity */
 	if(argc < 7) {
@@ -103,8 +102,14 @@ int main(int argc, char *argv[])
 		goto FREE_MEM;
 	}
 
-	remove_image_noise(input_img, output_img_median, window_size, NOISE_REMOVE_MEDIAN_FILTER);
-	remove_image_noise(output_img_median, output_img, window_size, NOISE_REMOVE_GAUSSIAN_FILTER);
+	status = remove_image_noise(input_img, output_img_median, window_size, NOISE_REMOVE_MEDIAN_FILTER);
+	if(status != ERROR_NONE) {
+		goto FREE_MEM;
+	}
+	status = remove_image_noise(output_img_median, output_img, window_size, NOISE_REMOVE_GAUSSIAN_FILTER);
+	if(status != ERROR_NONE) {
+		goto FREE_MEM;
+	}
 
 	LOG(OUTPUT, "\n########################################################\n");
 	LOG(OUTPUT, "Statistics for Noisy Image\n");
@@ -123,7 +128,10 @@ int main(int argc, char *argv[])
 	}
 
 
-	remove_image_noise(output_img_median, output_img, window_size, NOISE_REMOVE_LINEAR_FILTER);
+	status = remove_image_noise(output_img_median, output_img, window_size, NOISE_REMOVE_LINEAR_FILTER);
+	if(status != ERROR_NONE) {
+		goto FREE_MEM;
+	}
 	LOG(OUTPUT, "Statistics for Image after Linear filtering\n");
 	print_psnr(original_img, output_img);
 	LOG(OUTPUT, "\n########################################################\n");	

@@ -10,9 +10,8 @@ Description: Main function
 */
 int main(int argc, char* argv[])
 {
-	int 	 	status 				  = 0;
-	int      	iterator 		  	  = 0;
-	tagImageProp *input_img       	  = NULL;
+	int      	  iterator 		  	    = 0;
+	tagImageProp *input_img       	    = NULL;
 	tagImageProp *output_img_lightness  = NULL;
 	tagImageProp *output_img_average    = NULL;
 	tagImageProp *output_img_luminosity = NULL; 	

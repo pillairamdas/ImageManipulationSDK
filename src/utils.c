@@ -2,11 +2,11 @@
 
 /*
 Function   : max_of_3
-Input      : int a, b, c - Three integers for comparison
-Output     : int - Max of three input integers
+Input      : int32_t a, b, c - Three integers for comparison
+Output     : int32_t - Max of three input integers
 Description: Find maximum of 3 integers
 */
-int max_of_3(int a, int b, int c)
+int32_t max_of_3(int32_t a, int32_t b, int32_t c)
 {
 	if(a >= b && a >= c)
 		return a;
@@ -18,11 +18,11 @@ int max_of_3(int a, int b, int c)
 
 /*
 Function   : min_of_3
-Input      : int a, b, c - Three integers for comparison
-Output     : int - Min of three input integers
+Input      : int32_t a, b, c - Three integers for comparison
+Output     : int32_t - Min of three input integers
 Description: Find minimum of 3 integers
 */
-int min_of_3(int a, int b, int c)
+int32_t min_of_3(int32_t a, int32_t b, int32_t c)
 {
 	if(a <= b && a <= c)
 		return a;
@@ -35,16 +35,16 @@ int min_of_3(int a, int b, int c)
 /*
 Function   : dump_to_file 
 Input      : uint8_t *buf - Buffer to write
-			 int size     - Size of buffer
+			 int32_t size     - Size of buffer
 			 char *str    - filename
 Output     : 0 : on success
 			 -1: on failure
 Description: Dump contents of buffer to file
 */
-int dump_to_file(uint8_t* buf, int size, char *str)
+int32_t dump_to_file(uint8_t* buf, int32_t size, char *str)
 {
-	int out_fd = -1;
-	int status = 0;
+	int32_t out_fd = -1;
+	int32_t status = 0;
 
 	/* Open the file for writing */
 	out_fd = open(str, O_CREAT|O_WRONLY, 0666);
@@ -68,16 +68,16 @@ int dump_to_file(uint8_t* buf, int size, char *str)
 /*
 Function   : read_from_file
 Input      : uint8_t *buf - Buffer to read to 
-		     int size     - Size of buffer
+		     int32_t size     - Size of buffer
 		     char *str    - filename
 Output     : 0 : on success
 			 -1: on failure
 Description: Read contents of file to the buffer
 */
-int read_from_file(uint8_t *buf, int size, char *str)
+int32_t read_from_file(uint8_t *buf, int32_t size, char *str)
 {
-	int in_fd = -1;
-	int status = 0;
+	int32_t in_fd = -1;
+	int32_t status = 0;
 
 	/* Open the file for reading */ 
 	in_fd = open(str, O_RDONLY);
@@ -102,15 +102,15 @@ int read_from_file(uint8_t *buf, int size, char *str)
 Function   : get_input_pixel
 Input      : tagImageProp *input_img - Input Image 
              uint8_t *buffer 	- Output buffer to fill in pixel
-             int i 				- veritical axis location
-             int j 				- horizontal axis location
-             int width 			- width of the input image
-             int height 		- height of the input image
-             int bpp			- bytes per pixel of the input image
+             int32_t i 				- veritical axis location
+             int32_t j 				- horizontal axis location
+             int32_t width 			- width of the input image
+             int32_t height 		- height of the input image
+             int32_t bpp			- bytes per pixel of the input image
 Output     : None
 Description: Copy the pixel of the input image pointed by [i,j]
 */
-void get_input_pixel(tagImageProp *input_img, uint8_t *buffer, int i, int j) {
+void get_input_pixel(tagImageProp *input_img, uint8_t *buffer, int32_t i, int32_t j) {
 	uint8_t *temp = input_img->buffer + ((i * input_img->width) + j)*input_img->bpp;
 	memcpy(buffer, temp, input_img->bpp * sizeof(uint8_t));
 }
@@ -119,12 +119,12 @@ void get_input_pixel(tagImageProp *input_img, uint8_t *buffer, int i, int j) {
 /*
 Function   : get_input_pixel_ptr
 Input      : tagImageProp *input_img - Input Image 
-             int i 				- veritical axis location
-             int j 				- horizontal axis location
+             int32_t i 				- veritical axis location
+             int32_t j 				- horizontal axis location
 Output     : None
 Description: Copy the pixel of the input image pointed by [i,j]
 */
-uint8_t* get_input_pixel_ptr(tagImageProp *input_img, int i, int j) {
+uint8_t* get_input_pixel_ptr(tagImageProp *input_img, int32_t i, int32_t j) {
 	uint8_t *temp = input_img->buffer + ((i * input_img->width) + j)*input_img->bpp;
 	return temp;
 }
@@ -134,12 +134,12 @@ uint8_t* get_input_pixel_ptr(tagImageProp *input_img, int i, int j) {
 Function   : int_cmp
 Input      : const void *a, *b - Comparison parameters
 Output     : Comparison value
-Description: qsort int comparison function
+Description: qsort int32_t comparison function
 */
-int int_cmp(const void *a, const void *b) 
+int32_t int_cmp(const void *a, const void *b) 
 { 
-    const int *ia = (const int *)a; // casting pointer types 
-    const int *ib = (const int *)b;
+    const int32_t *ia = (const int32_t *)a; // casting pointer types 
+    const int32_t *ib = (const int32_t *)b;
     return *ia  - *ib; 
 	/* integer comparison: returns negative if b > a 
 	and positive if a > b */ 
@@ -148,15 +148,15 @@ int int_cmp(const void *a, const void *b)
 
 /*
 Function   : index_max
-Input      : int *arr - Input array
-			 int size - Input array size
+Input      : int32_t *arr - Input array
+			 int32_t size - Input array size
 Output     : Index of max value
 Description: Find the index of max element in the array
 */
-int index_max(int *arr, int size) {
-	int i = 0;
-	int max_pos = 0;
-	int max = 0;
+int32_t index_max(int32_t *arr, int32_t size) {
+	int32_t i = 0;
+	int32_t max_pos = 0;
+	int32_t max = 0;
 	for(i = 0; i<size; i++) {
 		if(max < arr[i]) {
 			max = arr[i];
@@ -170,21 +170,29 @@ int index_max(int *arr, int size) {
 
 /*
 Function   : get_median
-Input      : int *arr - Input array
-			 int size - Input array size
+Input      : int32_t *arr - Input array
+			 int32_t size - Input array size
 Output     : Median of the array
 Description: Find the median of array
 */
-int get_median(int *arr, int size)
+int32_t get_median(int32_t *arr, int32_t size)
 {
-	qsort(arr, size, sizeof(int), int_cmp);
+	qsort(arr, size, sizeof(int32_t), int_cmp);
 	return arr[size/2];
 }
 
+
+/*
+Function   : get_PSNR
+Input      : tagImageProp *input_img - Input image
+			 tagImageProp *filtered_img - Filtered image
+Output     : None
+Description: Print the PSNR statistics
+*/
 void get_PSNR(tagImageProp *input_img, tagImageProp *filtered_img)
 {
-	int channel_count = 0;
-	int iterator      = 0;
+	int32_t channel_count = 0;
+	int32_t iterator      = 0;
 	long long int noise         = 0;
 	float mse         = 0.0;
 	long long int   signal      = 0;
@@ -193,7 +201,7 @@ void get_PSNR(tagImageProp *input_img, tagImageProp *filtered_img)
 	float psnr_max    = 0.0;
 	uint8_t* inbuffer   = NULL;
 	uint8_t* outbuffer   = NULL;
-	int   max_intensity = 0;
+	int32_t   max_intensity = 0;
 
 	while(channel_count < input_img->bpp) {
 

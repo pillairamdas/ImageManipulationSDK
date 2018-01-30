@@ -10,16 +10,16 @@ Description: Resize the input image
 void bilinear_interpolation(tagImageProp *input_img, tagImageProp *output_img) 
 {
 	/* Temporary Variables */
-	int iterator      = 0;
-	int channel_count = 0;
+	int32_t iterator      = 0;
+	int32_t channel_count = 0;
 
 	/* Bilinear Interpolation Variables */
-	int   base_w 	= 0;
-	int   base_wp1 	= 0;
-	int   base_h 	= 0;
-	int   base_hp1 	= 0;
-	int   horiz 	= 0;
-	int   vert 		= 0;
+	int32_t   base_w 	= 0;
+	int32_t   base_wp1 	= 0;
+	int32_t   base_h 	= 0;
+	int32_t   base_hp1 	= 0;
+	int32_t   horiz 	= 0;
+	int32_t   vert 		= 0;
 	float sw 		= 0.0;
 	float sh 		= 0.0;
 	float delta_w 	= 0.0;

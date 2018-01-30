@@ -11,33 +11,33 @@ Description: Apply uniform histogram equalization on the image.
 void uniform_histogram_equalize(tagImageProp *input_img, tagImageProp *output_img)
 {
 	/* Temporary Variables */
-	int      iterator 		  	 = 0;
-	int 	 loop_count			 = 0;
-	int      channel_count       = 0;
+	int32_t      iterator 		  	 = 0;
+	int32_t 	 loop_count			 = 0;
+	int32_t      channel_count       = 0;
 	uint8_t *buffer              = NULL;
-	int      tempval1            = 0;
+	int32_t      tempval1            = 0;
 	
 	/* Gray to read histogram */
-	int 	 gray_bin[RGB_PIXEL_LEVELS]            = {0};
+	int32_t 	 gray_bin[RGB_PIXEL_LEVELS]            = {0};
 
 	/* Bucket indicator for each pixel intensity, that is,
 	/* this tells us how many pixels are required by this bucket
 	/* to fill up completely */
-	int      G[RGB_PIXEL_LEVELS]                   = {0};
+	int32_t      G[RGB_PIXEL_LEVELS]                   = {0};
 
 	/* Mapping table: Gives a meaning of which intensity
 	/* is contributing how much to which pixel intensities */
-	int      H[RGB_PIXEL_LEVELS][RGB_PIXEL_LEVELS] = {0};
+	int32_t      H[RGB_PIXEL_LEVELS][RGB_PIXEL_LEVELS] = {0};
 
 	/* Number of pixels to be allocated to each pixel intensity bucket */
-	int      nLevel              				   = 0;
+	int32_t      nLevel              				   = 0;
 
 	/* Measure used to know how many pixels spent from the bucket */
-	int      diff     			 				   = 0;
+	int32_t      diff     			 				   = 0;
 
 	/* Tells the number of pixel intensities which will have 1 
 	/* more pixels than the median  */
-	int      nRem                				   = 0;
+	int32_t      nRem                				   = 0;
 
 
 	/* Compute the nuber of pixels for each intensity bucket */
@@ -51,7 +51,7 @@ void uniform_histogram_equalize(tagImageProp *input_img, tagImageProp *output_im
 	while(channel_count < input_img->bpp) {
 
 		/* Reset the gray bin for histogram for each channel */
-		memset(gray_bin, 0, RGB_PIXEL_LEVELS * sizeof(int));
+		memset(gray_bin, 0, RGB_PIXEL_LEVELS * sizeof(int32_t));
 		
 		/* Initially fill all the buckets */
 		/* If Remainder is present, add 1 pixel to each intensity to compensate */
@@ -83,7 +83,7 @@ void uniform_histogram_equalize(tagImageProp *input_img, tagImageProp *output_im
 #endif 
 		
 		/* Reset the mapping table for this channel */
-		memset(H, 0, RGB_PIXEL_LEVELS*RGB_PIXEL_LEVELS*sizeof(int));
+		memset(H, 0, RGB_PIXEL_LEVELS*RGB_PIXEL_LEVELS*sizeof(int32_t));
 
 
 		/* Iterate over all pixel intensities to create the mapping table */

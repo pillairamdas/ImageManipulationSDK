@@ -10,7 +10,6 @@ Description: Main function
 */
 int main(int argc, char* argv[])
 {
-	int 	 	  status 			  = 0;
 	int      	  iterator 		  	  = 0;
 	tagImageProp *input_img       	  = NULL;
 	tagImageProp *output_img_cmy      = NULL;

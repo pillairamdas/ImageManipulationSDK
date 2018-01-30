@@ -9,7 +9,7 @@ Description: Generate grayscale image based on lightness method
 */
 void get_grayscale_lightness(tagImageProp *input_img, tagImageProp *output_img)
 {
-	int      iterator = 0;
+	int32_t      iterator = 0;
 	uint8_t *buffer   = NULL;
 
 	/*
@@ -38,7 +38,7 @@ Description: Generate grayscale image based on average method
 */
 void get_grayscale_average(tagImageProp *input_img, tagImageProp *output_img)
 {
-	int      iterator = 0;
+	int32_t      iterator = 0;
 	uint8_t *buffer   = NULL;
 
 	/*
@@ -64,7 +64,7 @@ Description: Generate grayscale image based on luminosity method
 */
 void get_grayscale_luminosity(tagImageProp *input_img, tagImageProp *output_img)
 {
-	int      iterator = 0;
+	int32_t      iterator = 0;
 	uint8_t *buffer   = NULL;
 
 	/*
@@ -90,8 +90,8 @@ Description: Generate RGB to CMY
 */
 void convert_to_cmy(tagImageProp *input_img, tagImageProp *output_img)
 {
-	int      iterator      = 0;
-	int      channel_count = 0;
+	int32_t      iterator      = 0;
+	int32_t      channel_count = 0;
 	uint8_t *buffer        = NULL;
 
 	/* Invert the RGB pixel intensities */
@@ -119,7 +119,7 @@ Description: Generate RGB to CYAN
 */
 void convert_to_c(tagImageProp *input_img, tagImageProp *output_img)
 {
-	int      iterator = 0;
+	int32_t      iterator = 0;
 	uint8_t *buffer   = NULL;
 
 	/* Invert the R pixels and store them as grayscale */
@@ -141,7 +141,7 @@ Description: Generate RGB to MAGENTA
 */
 void convert_to_m(tagImageProp *input_img, tagImageProp *output_img)
 {
-	int      iterator = 0;
+	int32_t      iterator = 0;
 	uint8_t *buffer   = NULL;
 
 	/* Invert the G pixels and store them as grayscale */
@@ -162,7 +162,7 @@ Description: Generate RGB to YELLOW
 */
 void convert_to_y(tagImageProp *input_img, tagImageProp *output_img)
 {
-	int      iterator = 0;
+	int32_t      iterator = 0;
 	uint8_t *buffer   = NULL;
 
 	/* Invert the B pixels and store them as grayscale */
@@ -183,8 +183,8 @@ Description: Generate a negative RGB image.
 */
 void convert_to_negativeRGB(tagImageProp *input_img, tagImageProp *output_img)
 {
-	int      iterator      = 0;
-	int      channel_count = 0;
+	int32_t      iterator      = 0;
+	int32_t      channel_count = 0;
 	uint8_t *buffer        = NULL;
 
 	/* Invert the RGB pixel intensities */

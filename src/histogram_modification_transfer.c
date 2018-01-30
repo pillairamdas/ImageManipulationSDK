@@ -15,13 +15,13 @@ void histogram_modify(tagImageProp *input_img, tagImageProp *output_img, tagHist
 {
 
 	/* Temporary Variables */
-	int      iterator               = 0;
-	int      channel_count          = 0;
-	int      tempval                = 0;
+	int32_t      iterator               = 0;
+	int32_t      channel_count          = 0;
+	int32_t      tempval                = 0;
 	uint8_t *buffer                 = NULL;
 
 	/* Array to store histogram values */
-	int 	 gray_level_bin[RGB_BITS_PER_PIXEL][RGB_PIXEL_LEVELS] = {0};
+	int32_t 	 gray_level_bin[RGB_BITS_PER_PIXEL][RGB_PIXEL_LEVELS] = {0};
 
 	/* Array to store the probability table */
 	float    prob_bins[RGB_PIXEL_LEVELS] 	= {0.0};

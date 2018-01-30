@@ -18,14 +18,14 @@
 /*
 Function   : fetch_color_levels
 Input      : tagImageProp *input_img  - Input image
-             long long int colors     - Number of colors
-             int **boundary_level     - Boundary levels to be populated.
-             int *len                 - Color depth of the channel
-             int channel_count        - Channel index
+             int32_t **color_level    - Color levels for each channel.
+             int32_t **boundary_level - Boundary levels to be populated.
+             int32_t *len             - Color depth of the channel
+             int32_t channel_count    - Channel index
 Output     : None
 Description: Identify the color levels and boundary levels based on the colors
 */
-void fetch_color_levels(tagImageProp *input_img, int **color_level, int **boundary_level, int *len, int channel_count);
+void fetch_color_levels(tagImageProp *input_img, int32_t **color_level, int32_t **boundary_level, int32_t *len, int32_t channel_count);
 
 /*
 Function   : convert_color

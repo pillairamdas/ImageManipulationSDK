@@ -9,9 +9,9 @@ Description: Perform reflection to the side on input image
 */
 void reflect_to_side(tagImageProp *input_img, tagImageProp *output_img)
 {
-	int      i              = 0;
-	int      j              = 0;
-	int      channel_count  = 0; 
+	int32_t      i              = 0;
+	int32_t      j              = 0;
+	int32_t      channel_count  = 0; 
 	uint8_t *buffer         = NULL;
 
 

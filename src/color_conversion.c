@@ -3,31 +3,31 @@
 /*
 Function   : fetch_color_levels
 Input      : tagImageProp *input_img  - Input image
-             long long int colors     - Number of colors
-             int **boundary_level     - Boundary levels to be populated.
-             int *len                 - Color depth of the channel
-             int channel_count        - Channel index
+             int32_t **color_level    - Color levels for each channel
+             int32_t **boundary_level     - Boundary levels to be populated.
+             int32_t *len                 - Color depth of the channel
+             int32_t channel_count        - Channel index
 Output     : None
 Description: Identify the color levels and boundary levels based on the colors
 */
-void fetch_color_levels(tagImageProp *input_img, int **color_level, int **boundary_level, int *len, int channel_count) 
+void fetch_color_levels(tagImageProp *input_img, int32_t **color_level, int32_t **boundary_level, int32_t *len, int32_t channel_count) 
 {
 	/* Temporary Variables */
-	int 	 iterator     	= 0;
-	int 	 i             	= 0; 
-	int 	 j             	= 0; 
-	int 	 k             	= 0; 
-	int 	 tempval       	= 0; 
+	int32_t 	 iterator     	= 0;
+	int32_t 	 i             	= 0; 
+	int32_t 	 j             	= 0; 
+	int32_t 	 k             	= 0; 
+	int32_t 	 tempval       	= 0; 
 	uint8_t *buffer   		= NULL;
 
 	/* Stores the histogram for input image for a particular channel */
-	int 	 gray_bin[RGB_PIXEL_LEVELS] 	= {0};
+	int32_t 	 gray_bin[RGB_PIXEL_LEVELS] 	= {0};
 
 	/* Sotres the median level of color bins */
-	int 	 median_level 	= 0;
+	int32_t 	 median_level 	= 0;
 
 	/* Stores the boundaries for each median level */
-	int 	 boundary    	= 0;
+	int32_t 	 boundary    	= 0;
 
 
 	/* Compute the median level based on the color depth */
@@ -88,23 +88,23 @@ Description: Change the color pallete
 tagStatus convert_color(tagImageProp *input_img, tagImageProp *output_img, long long int colors)
 {
 	/* Temporary Variables */
- 	int       iterator        = 0;
- 	int       tempval         = 0;
+ 	int32_t       iterator        = 0;
+ 	int32_t       tempval         = 0;
  	uint8_t  *buffer          = NULL;
- 	int       i               = 0;
- 	int       channel_count   = 0;
+ 	int32_t       i               = 0;
+ 	int32_t       channel_count   = 0;
 
  	/* Store the depth level for R, G, B */
-	int       len[RGB_BITS_PER_PIXEL] = {0};
+	int32_t       len[RGB_BITS_PER_PIXEL] = {0};
 
 	/* The generic depth level as per color palette */
- 	int       color_cbr       = 0;
+ 	int32_t       color_cbr       = 0;
 
  	/* Color depth levels for each channel */
- 	int     **color_level     = NULL;
+ 	int32_t     **color_level     = NULL;
 
  	/* Boundary levels for color depth of each channel */
- 	int     **boundary_level  = NULL;
+ 	int32_t     **boundary_level  = NULL;
 
 
  	/* Special case of 256 colors */
@@ -115,7 +115,7 @@ tagStatus convert_color(tagImageProp *input_img, tagImageProp *output_img, long 
 	} else {
 
 		/* Get the cube root of the color to identify color levels for each channel */
-		color_cbr = (int) cbrt(colors);
+		color_cbr = (int32_t) cbrt(colors);
 
 		if(colors != (color_cbr * color_cbr * color_cbr)) {
 			LOG(ERROR, "%lld is not a valid color level\n", colors);
@@ -130,12 +130,12 @@ tagStatus convert_color(tagImageProp *input_img, tagImageProp *output_img, long 
 	/* Allocate memory for color level and boundary 
 	/* levels according to the bytes per pixel of the image.
 	*/
-	color_level    = (int **) malloc(input_img->bpp * sizeof(int *));
+	color_level    = (int32_t **) malloc(input_img->bpp * sizeof(int32_t *));
 	if(color_level == NULL) {
 		LOG(ERROR, "Memory unavailable!\n");
 		goto FREE_MEM;		
 	}	
-	boundary_level = (int **) malloc(input_img->bpp * sizeof(int *));
+	boundary_level = (int32_t **) malloc(input_img->bpp * sizeof(int32_t *));
 	if(boundary_level == NULL) {
 		LOG(ERROR, "Memory unavailable!\n");
 		goto FREE_MEM;		
@@ -149,12 +149,12 @@ tagStatus convert_color(tagImageProp *input_img, tagImageProp *output_img, long 
 		/* levels according to the color depth required 
 		/* for the color palette.
 		*/
-		color_level[channel_count] = (int *) malloc(len[channel_count] * sizeof(int));
+		color_level[channel_count] = (int32_t *) malloc(len[channel_count] * sizeof(int32_t));
 		if(color_level[channel_count] == NULL) {
 			LOG(ERROR, "Memory unavailable!\n");
 			goto FREE_MEM;		
 		}
-		boundary_level[channel_count] = (int *) malloc(len[channel_count] * sizeof(int));
+		boundary_level[channel_count] = (int32_t *) malloc(len[channel_count] * sizeof(int32_t));
 		if(boundary_level[channel_count] == NULL) {
 			LOG(ERROR, "Memory unavailable!\n");
 			goto FREE_MEM;		

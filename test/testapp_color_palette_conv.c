@@ -3,10 +3,10 @@
 int main(int argc, char *argv[])
 {
 
-	int 	 status 			= 0;
-	tagImageProp *input_img          = NULL;	
-	tagImageProp *output_img         = NULL;
+	tagImageProp *input_img     = NULL;	
+	tagImageProp *output_img    = NULL;
 	long long int colors        = 0;
+	tagStatus     status        = ERROR_NONE;
 
 
 	/* Check for application validity */
@@ -59,7 +59,10 @@ int main(int argc, char *argv[])
 
 	colors = atoi(argv[5]);
 
-	change_color_palette(input_img, output_img, colors);
+	status = change_color_palette(input_img, output_img, colors);
+	if(status != ERROR_NONE) {
+		goto FREE_MEM;
+	}
 
 	if((dump_to_file(output_img->buffer, output_img->size, "color_conversion.raw")) != 0) {
 		goto FREE_MEM;

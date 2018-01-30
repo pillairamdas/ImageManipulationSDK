@@ -3,8 +3,6 @@
 
 int main(int argc, char *argv[])
 {
-
-	int 	       status 		= 0;
 	tagImageProp  *input_img    = NULL;	
 	tagImageProp  *output_img   = NULL;
 	char           method[80];
