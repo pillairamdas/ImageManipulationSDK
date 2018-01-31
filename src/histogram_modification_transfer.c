@@ -76,6 +76,14 @@ void histogram_modify(tagImageProp *input_img, tagImageProp *output_img, tagHist
 				++iterator;
 			}
 
+			iterator = 0;
+			LOG(OUTPUT, "Transfer function of %d channel of input image: \n", channel_count);
+			while(iterator < RGB_PIXEL_LEVELS) {
+				LOG(OUTPUT, "Channel %d Prob %0.4f \n", channel_count, prob_bins[iterator]);
+				++iterator;
+			}
+			LOG(OUTPUT, "\n");			
+
 			/* cdf table */	
 			cdf_bins[0] = prob_bins[0];
 			iterator = 1;
@@ -87,6 +95,7 @@ void histogram_modify(tagImageProp *input_img, tagImageProp *output_img, tagHist
 
 				++iterator;
 			}
+
 
 			/* Map the output image based on the CDF for the input image */
 			iterator = 0;
