@@ -23,12 +23,13 @@ typedef enum LOG_STATE {
 } LOG_STATE;
 
 
-#define LOG(X, ...)						if(X == ERROR) { \
+#define LOG(X, ...)						if((X == ERROR) && (DEBUG_LEVEL >= ERROR)) { \
 											printf("\n[ERROR] %s: %s(%d): ", __FILE__, __func__, __LINE__); \
-										} else if(X == DEBUG) { \
+										} else if((X == DEBUG) && (DEBUG_LEVEL >= DEBUG)) { \
 											printf("\n[DEBUG] %s: %s(%d): ", __FILE__, __func__, __LINE__); \
 										} \
-										printf(__VA_ARGS__);
+										if(X <= DEBUG_LEVEL) \
+											printf(__VA_ARGS__);
 
 
 #define RGB_BITS_PER_PIXEL				3

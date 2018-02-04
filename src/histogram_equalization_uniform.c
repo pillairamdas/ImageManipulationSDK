@@ -20,6 +20,9 @@ void uniform_histogram_equalize(tagImageProp *input_img, tagImageProp *output_im
 	/* Gray to read histogram */
 	int32_t 	 gray_bin[RGB_PIXEL_LEVELS]            = {0};
 
+	/* Cumulative histogram */
+	int32_t 	 cumulative_histo[RGB_PIXEL_LEVELS]    = {0};
+
 	/* Bucket indicator for each pixel intensity, that is,
 	/* this tells us how many pixels are required by this bucket
 	/* to fill up completely */
@@ -74,20 +77,18 @@ void uniform_histogram_equalize(tagImageProp *input_img, tagImageProp *output_im
 			++iterator;
 		}
 
-#ifdef PRINT_OUTPUT
 		iterator = 0;
 		while(iterator < RGB_PIXEL_LEVELS) {
-			LOG(DEBUG, "Histogram[%d] %d\n", channel_count, gray_bin[iterator]);
+			LOG(DEBUG, "Histogram[%d] %d", channel_count, gray_bin[iterator]);
 			++iterator;
 		}
-#endif 
 		
 		/* Reset the mapping table for this channel */
 		memset(H, 0, RGB_PIXEL_LEVELS*RGB_PIXEL_LEVELS*sizeof(int32_t));
 
 
 		/* Iterate over all pixel intensities to create the mapping table */
-		iterator = 0;
+		iterator   = 0;
 		loop_count = 0;
 		while(iterator < RGB_PIXEL_LEVELS) {
 
@@ -110,8 +111,8 @@ void uniform_histogram_equalize(tagImageProp *input_img, tagImageProp *output_im
 					H[iterator][loop_count] = gray_bin[iterator];
 
 					/* Now that the number of pixels for this intensity is 
-					/* depleted, let's reset it to 0.
-					gray_bin[iterator] = 0; */
+					/* depleted, let's reset it to 0. */
+					gray_bin[iterator] = 0; 
 
 
 					/* Check if just in case, the bucket is also completely 
@@ -178,6 +179,38 @@ void uniform_histogram_equalize(tagImageProp *input_img, tagImageProp *output_im
 			*(output_img->buffer + iterator * output_img->bpp + channel_count) = tempval1;
 			++iterator;
 		}
+
+
+		/* Compute the cumulative histogram */
+
+
+		/* Reset the gray bin for histogram for each channel */
+		memset(gray_bin, 0, RGB_PIXEL_LEVELS * sizeof(int32_t));
+
+		/* Compute the cumulative histogram for this channel */
+		iterator = 0;
+		while(iterator < input_img->pixel_count) {
+
+			buffer = output_img->buffer + iterator * output_img->bpp + channel_count;
+
+			gray_bin[*(buffer)]++;
+			++iterator;
+		}
+		
+		iterator = 1;
+		cumulative_histo[0] = gray_bin[0];
+		while(iterator < RGB_PIXEL_LEVELS) {
+			cumulative_histo[iterator] = cumulative_histo[iterator-1] + gray_bin[iterator];
+			++iterator;
+		}
+
+		iterator = 0;
+		while(iterator < RGB_PIXEL_LEVELS) {
+			LOG(OUTPUT, "Cumulative_Histogram[%d] %d\n", channel_count, cumulative_histo[iterator]);
+			++iterator;
+		}
+
+
 	++channel_count;
 	}
 }

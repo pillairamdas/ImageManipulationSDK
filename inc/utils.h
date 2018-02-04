@@ -61,7 +61,7 @@ Input      : uint8_t *input_img - Input Image
              int32_t i 				- veritical axis location
              int32_t j 				- horizontal axis location
              int32_t width 			- width of the input image
-             int32_t height 		- height of the input image
+             int32_t height 		      - height of the input image
              int32_t bpp			- bytes per pixel of the input image
 Output     : None
 Description: Copy the pixel of the input image pointed by [i,j]
@@ -75,7 +75,7 @@ Input      : uint8_t *input_img - Input Image
              int32_t i 				- veritical axis location
              int32_t j 				- horizontal axis location
              int32_t width 			- width of the input image
-             int32_t height 		- height of the input image
+             int32_t height 		      - height of the input image
              int32_t bpp			- bytes per pixel of the input image
 Output     : None
 Description: Copy the pixel of the input image pointed by [i,j]

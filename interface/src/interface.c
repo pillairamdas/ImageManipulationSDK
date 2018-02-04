@@ -167,6 +167,7 @@ tagStatus remove_image_noise(tagImageProp *input_img, tagImageProp *output_img, 
 	if(method == NOISE_REMOVE_MEDIAN_FILTER) {
 		status = apply_filter(input_img, output_img, window_size, FILTER_MEDIAN);
 	} else if(method == NOISE_REMOVE_GAUSSIAN_FILTER) {
+		printf("%s %d\n",__FILE__, __LINE__);
 		status = apply_filter(input_img, output_img, window_size, FILTER_GAUSSIAN);
 	} else if(method == NOISE_REMOVE_LINEAR_FILTER) {
 		status = apply_filter(input_img, output_img, window_size, FILTER_LINEAR);

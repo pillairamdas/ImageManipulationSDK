@@ -244,7 +244,9 @@ void get_PSNR(tagImageProp *input_img, tagImageProp *filtered_img)
 		}
 
 
+
 		LOG(OUTPUT, "\n");
+		LOG(OUTPUT, "Noise                                  : %lld\n", noise);
 		LOG(OUTPUT, "Signal to Noise Ratio                  : %0.2f dB\n", snr);
 		LOG(OUTPUT, "Mean Square Error                      : %0.2f\n", mse);
 		LOG(OUTPUT, "Peak-Signal to Noise Ratio (Max = 255) : %0.2f dB\n", psnr_255);

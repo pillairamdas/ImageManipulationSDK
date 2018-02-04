@@ -338,4 +338,6 @@ FREE_MEM:
 		kernel = NULL;
 	}
 
+	return ERROR_NONE;
+
 }
