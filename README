@@ -11,9 +11,49 @@ This is a RGB image manipulation software capable of below features:
 	- Film effect
 	- Image denosing for impulse noise and random gaussian noise.
 
-Sample Usage:
-./oil_effect_app Barn.raw 400 300 3 5 64
+
+Compiler Used:
+gcc (Ubuntu 5.4.0-6ubuntu1~16.04.6) 5.4.0 20160609
+
+System Info:
+Linux LubuntuSV 4.13.0-32-generic #35~16.04.1-Ubuntu
 
 Installation:
+Unzip source code zip file at a convinient location.
 make clean && make
+
+Testing:
+cd bin/
+1. Conversion from RGB to Grayscale
+	Usage  : ./conv_gray_app <input image> <width> <height> <bits per pixel>
+	Example: ./conv_gray_app Tiffany.raw 512 512 3
+	Output : Processed_Lightness.raw, Processed_Average.raw, Processed_Luminosity.raw
+2. Conversion from RGB to CMY color space
+	Usage  : ./conv_cmy_app <input image> <width> <height> <bits per pixel>
+	Example: ./conv_cmy_app Bear.raw 854 480 3
+	Output : CMY_out.raw, CYAN_out.raw, MAGENTA_out.raw, YELLOW_out.raw 
+3. RGB image resize application
+	Usage  : ./resize_app <input image> <input_width> <input_height> <input bits per pixel> <output_width> <output_height>
+	Example: ./resize_app Airplane.raw 512 512 3 650 650
+	Output : RESIZE_out.raw
+4. Contrast enhanceent application
+	Usage  : ./contrast_manip_app <input image> <input_width> <input_height> <input bits per pixel> <method>
+		       method: transfer or uniform
+	Example: ./contrast_manip_app Desk.raw 400 300 3 transfer
+	         ./contrast_manip_app Desk.raw 400 300 3 uniform
+	Output : Contrast_Enhanced.raw
+5. Bring oil painting effect into RGB images
+	Usage  : ./oil_effect_app <input image> <width> <height> <bits per pixel> <window size> <colors> 
+	Example: ./oil_effect_app Barn.raw 380 275 3 5 64
+	Output : OUT_Oil_Effect.raw
+6. Bring film effect into RGB images
+	Usage  : ./film_effect_app <input image> <input_width> <input_height> <input bits per pixel>
+	Example: ./film_effect_app Original.raw 1000 750 3
+	Output : film_effect.raw
+7. Perform basic image de-noising on RGB images and print the de-noising statistics.
+	Usage  : ./denoise_app <input image> <original_image> <input_width> <input_height> <input bits per pixel> <window size>
+	Example: ./denoise_app Lena_mixed.raw Lena.raw 512 512 3 5
+	Output : Median_Filtered.raw (for only median filtered output)
+	         Basic_Filtering.raw (for median + gaussian approximated non-linear filter output)
+	         Linear_Filtering.raw (for median + linear filter output)
 
