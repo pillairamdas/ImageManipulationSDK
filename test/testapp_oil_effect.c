@@ -95,34 +95,34 @@ int main(int argc, char *argv[])
 
 FREE_MEM:
 
-	if(output_img->buffer != NULL) {
-		free(output_img->buffer);
-		output_img->buffer = NULL;
-	}
-	if(output_img != NULL) {
-		free(output_img);
-		output_img = NULL;
-	}
 
-	if(col_conv_img->buffer != NULL) {
-		free(col_conv_img->buffer);
-		col_conv_img->buffer = NULL;
+	if(input_img != NULL) {
+		if(input_img->buffer != NULL) {
+			free(input_img->buffer);
+			input_img->buffer = NULL;
+		}
+		free(input_img);
+		input_img = NULL;
 	}
 
 	if(col_conv_img != NULL) {
+		if(col_conv_img->buffer != NULL) {
+			free(col_conv_img->buffer);
+			col_conv_img->buffer = NULL;
+		}
 		free(col_conv_img);
 		col_conv_img = NULL;
 	}
 
-	if(input_img->buffer != NULL) {
-		free(input_img->buffer);
-		input_img->buffer = NULL;
+	if(output_img != NULL) {
+		if(output_img->buffer != NULL) {
+			free(output_img->buffer);
+			output_img->buffer = NULL;
+		}
+		free(output_img);
+		output_img = NULL;
 	}
 
-	if(input_img != NULL) {
-		free(input_img);
-		input_img = NULL;
-	}
 
 EXIT:
 	return 0;

@@ -148,55 +148,52 @@ int main(int argc, char* argv[])
 
 
 FREE_MEM:
-	if(input_img->buffer != NULL) {
-		free(input_img->buffer);
-		input_img->buffer = NULL;
-	}
 
 	if(input_img != NULL) {
+		if(input_img->buffer != NULL) {
+			free(input_img->buffer);
+			input_img->buffer = NULL;
+		}
 		free(input_img);
 		input_img = NULL;
 	}
 
-	if(output_img_cmy->buffer != NULL) {
-		free(output_img_cmy->buffer);
-		output_img_cmy->buffer = NULL;
-	}
-
 	if(output_img_cmy != NULL) {
+		if(output_img_cmy->buffer != NULL) {
+			free(output_img_cmy->buffer);
+			output_img_cmy->buffer = NULL;
+		}
 		free(output_img_cmy);
 		output_img_cmy = NULL;
 	}
 
-	if(output_img_cyan->buffer != NULL) {
-		free(output_img_cyan->buffer);
-		output_img_cyan->buffer = NULL;
-	}
-
 	if(output_img_cyan != NULL) {
+		if(output_img_cyan->buffer != NULL) {
+			free(output_img_cyan->buffer);
+			output_img_cyan->buffer = NULL;
+		}
 		free(output_img_cyan);
 		output_img_cyan = NULL;
 	}
 
-	if(output_img_magenta->buffer != NULL) {
-		free(output_img_magenta->buffer);
-		output_img_magenta->buffer = NULL;
-	}
-
 	if(output_img_magenta != NULL) {
+		if(output_img_magenta->buffer != NULL) {
+			free(output_img_magenta->buffer);
+			output_img_magenta->buffer = NULL;
+		}
 		free(output_img_magenta);
 		output_img_magenta = NULL;
 	}
 
-	if(output_img_yellow->buffer != NULL) {
-		free(output_img_yellow->buffer);
-		output_img_yellow->buffer = NULL;
-	}
-
 	if(output_img_yellow != NULL) {
+		if(output_img_yellow->buffer != NULL) {
+			free(output_img_yellow->buffer);
+			output_img_yellow->buffer = NULL;
+		}
 		free(output_img_yellow);
 		output_img_yellow = NULL;
 	}
+
 
 EXIT:
 	return 0;

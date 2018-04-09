@@ -122,42 +122,39 @@ int main(int argc, char* argv[])
 
 
 FREE_MEM:
-	if(input_img->buffer != NULL) {
-		free(input_img->buffer);
-		input_img->buffer = NULL;
-	}
 
 	if(input_img != NULL) {
+		if(input_img->buffer != NULL) {
+			free(input_img->buffer);
+			input_img->buffer = NULL;
+		}
 		free(input_img);
 		input_img = NULL;
 	}
 
-	if(output_img_lightness->buffer != NULL) {
-		free(output_img_lightness->buffer);
-		output_img_lightness->buffer = NULL;
-	}
-
 	if(output_img_lightness != NULL) {
+		if(output_img_lightness->buffer != NULL) {
+			free(output_img_lightness->buffer);
+			output_img_lightness->buffer = NULL;
+		}
 		free(output_img_lightness);
 		output_img_lightness = NULL;
 	}
 
-	if(output_img_average->buffer != NULL) {
-		free(output_img_average->buffer);
-		output_img_average->buffer = NULL;
-	}
-
 	if(output_img_average != NULL) {
+		if(output_img_average->buffer != NULL) {
+			free(output_img_average->buffer);
+			output_img_average->buffer = NULL;
+		}
 		free(output_img_average);
 		output_img_average = NULL;
 	}
 
-	if(output_img_luminosity->buffer != NULL) {
-		free(output_img_luminosity->buffer);
-		output_img_luminosity->buffer = NULL;
-	}
-
 	if(output_img_luminosity != NULL) {
+		if(output_img_luminosity->buffer != NULL) {
+			free(output_img_luminosity->buffer);
+			output_img_luminosity->buffer = NULL;
+		}
 		free(output_img_luminosity);
 		output_img_luminosity = NULL;
 	}
