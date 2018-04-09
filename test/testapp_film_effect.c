@@ -56,9 +56,10 @@ int main(int argc, char *argv[])
 	photo_effect(input_img, output_img, -1, -1, EFFECT_FILM_EFFECT);
 
 
-	if((dump_to_file(output_img->buffer, output_img->size, "film_effect.raw")) != 0) {
+	if((dump_to_file(output_img->buffer, output_img->size, "OUT_film_effect.raw")) != 0) {
 		goto FREE_MEM;
 	}
+	LOG(OUTPUT, "Output Filename: OUT_film_effect.raw\n");
 
 FREE_MEM:
 

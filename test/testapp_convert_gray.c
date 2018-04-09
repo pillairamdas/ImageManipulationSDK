@@ -110,15 +110,18 @@ int main(int argc, char* argv[])
 	convert(input_img, output_img_luminosity, COLORSPACE_GRAY_LUMINOSITY);
 	
 
-	if((dump_to_file(output_img_lightness->buffer, output_img_lightness->size, "Processed_Lightness.raw")) != 0) {
+	if((dump_to_file(output_img_lightness->buffer, output_img_lightness->size, "OUT_GRAY_Lightness.raw")) != 0) {
 		goto FREE_MEM;
 	}
-	if((dump_to_file(output_img_average->buffer, output_img_average->size, "Processed_Average.raw")) != 0) {
+	LOG(OUTPUT, "Output Filename: OUT_GRAY_Lightness.raw\n");
+	if((dump_to_file(output_img_average->buffer, output_img_average->size, "OUT_GRAY_Average.raw")) != 0) {
 		goto FREE_MEM;
 	}
-	if((dump_to_file(output_img_luminosity->buffer, output_img_luminosity->size, "Processed_Luminosity.raw")) != 0) {
+	LOG(OUTPUT, "Output Filename: OUT_GRAY_Average.raw\n");
+	if((dump_to_file(output_img_luminosity->buffer, output_img_luminosity->size, "OUT_GRAY_Luminosity.raw")) != 0) {
 		goto FREE_MEM;
 	}
+	LOG(OUTPUT, "Output Filename: OUT_GRAY_Luminosity.raw\n");
 
 
 FREE_MEM:

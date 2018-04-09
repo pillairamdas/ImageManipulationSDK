@@ -18,12 +18,12 @@ void get_grayscale_lightness(tagImageProp *input_img, tagImageProp *output_img)
 	*/
 	while(iterator < output_img->pixel_count) {
 		buffer = input_img->buffer + iterator*input_img->bpp;
-		*(output_img->buffer + iterator*output_img->bpp) = (max_of_3(*(buffer + RED_CHANNEL), \
-																	 *(buffer + GREEN_CHANNEL), \
-																	 *(buffer + BLUE_CHANNEL)) 
-		                                                  + min_of_3(*(buffer + RED_CHANNEL), \
-		                                                  			 *(buffer + GREEN_CHANNEL), \
-		                                                  			 *(buffer + BLUE_CHANNEL))) / 2;
+		*(output_img->buffer + iterator*output_img->bpp) = (max_of_3(*(buffer + R_CHANNEL), \
+																	 *(buffer + G_CHANNEL), \
+																	 *(buffer + B_CHANNEL)) 
+		                                                  + min_of_3(*(buffer + R_CHANNEL), \
+		                                                  			 *(buffer + G_CHANNEL), \
+		                                                  			 *(buffer + B_CHANNEL))) / 2;
 		iterator++;   
 	}
 }
@@ -47,9 +47,9 @@ void get_grayscale_average(tagImageProp *input_img, tagImageProp *output_img)
 	*/
 	while(iterator < output_img->pixel_count) {
 		buffer = input_img->buffer + iterator*input_img->bpp;		
-		*(output_img->buffer + iterator*output_img->bpp) = (*(buffer + RED_CHANNEL) + \
-															*(buffer + GREEN_CHANNEL) + \
-															*(buffer + BLUE_CHANNEL)) / 3;
+		*(output_img->buffer + iterator*output_img->bpp) = (*(buffer + R_CHANNEL) + \
+															*(buffer + G_CHANNEL) + \
+															*(buffer + B_CHANNEL)) / 3;
 		iterator++;   
 	}
 }
@@ -73,9 +73,9 @@ void get_grayscale_luminosity(tagImageProp *input_img, tagImageProp *output_img)
 	*/
 	while(iterator < output_img->pixel_count) {
 		buffer = input_img->buffer + iterator*input_img->bpp;		
-		*(output_img->buffer + iterator*output_img->bpp) = (0.21 * (float)*(buffer + RED_CHANNEL) + \
-														    0.72 * (float)*(buffer + GREEN_CHANNEL) + \
-														    0.07 * (float)*(buffer + BLUE_CHANNEL));
+		*(output_img->buffer + iterator*output_img->bpp) = (0.21 * (float)*(buffer + R_CHANNEL) + \
+														    0.72 * (float)*(buffer + G_CHANNEL) + \
+														    0.07 * (float)*(buffer + B_CHANNEL));
 		iterator++;   
 	}
 }
@@ -126,7 +126,7 @@ void convert_to_c(tagImageProp *input_img, tagImageProp *output_img)
 	while(iterator < output_img->pixel_count) {
 		buffer = input_img->buffer + iterator*input_img->bpp;
 		
-		*(output_img->buffer + iterator*output_img->bpp)     = MAX_PIXEL_LEVEL - *(buffer + RED_CHANNEL);
+		*(output_img->buffer + iterator*output_img->bpp)     = MAX_PIXEL_LEVEL - *(buffer + R_CHANNEL);
 		iterator++;
 	}	
 }
@@ -147,7 +147,7 @@ void convert_to_m(tagImageProp *input_img, tagImageProp *output_img)
 	/* Invert the G pixels and store them as grayscale */
 	while(iterator < output_img->pixel_count) {
 		buffer = input_img->buffer + iterator*input_img->bpp;
-		*(output_img->buffer + iterator * output_img->bpp + GREEN_CHANNEL) = MAX_PIXEL_LEVEL - *(buffer + GREEN_CHANNEL);
+		*(output_img->buffer + iterator * output_img->bpp + G_CHANNEL) = MAX_PIXEL_LEVEL - *(buffer + G_CHANNEL);
 		iterator++;
 	}	
 }
@@ -168,7 +168,7 @@ void convert_to_y(tagImageProp *input_img, tagImageProp *output_img)
 	/* Invert the B pixels and store them as grayscale */
 	while(iterator < output_img->pixel_count) {
 		buffer = input_img->buffer + iterator*input_img->bpp;
-		*(output_img->buffer + iterator*output_img->bpp + BLUE_CHANNEL) = MAX_PIXEL_LEVEL - *(buffer + BLUE_CHANNEL);
+		*(output_img->buffer + iterator*output_img->bpp + B_CHANNEL) = MAX_PIXEL_LEVEL - *(buffer + B_CHANNEL);
 		iterator++;
 	}	
 }

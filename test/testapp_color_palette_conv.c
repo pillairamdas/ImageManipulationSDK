@@ -64,9 +64,10 @@ int main(int argc, char *argv[])
 		goto FREE_MEM;
 	}
 
-	if((dump_to_file(output_img->buffer, output_img->size, "color_conversion.raw")) != 0) {
+	if((dump_to_file(output_img->buffer, output_img->size, "OUT_color_converted.raw")) != 0) {
 		goto FREE_MEM;
 	}
+	LOG(OUTPUT, "Output Filename: OUT_color_converted.raw\n");
 
 FREE_MEM:
 

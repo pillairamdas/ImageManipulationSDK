@@ -109,9 +109,9 @@ tagStatus convert_color(tagImageProp *input_img, tagImageProp *output_img, long 
 
  	/* Special case of 256 colors */
 	if(colors == 256) {
-		len[RED_CHANNEL] = 8;
-		len[GREEN_CHANNEL] = 8;
-		len[BLUE_CHANNEL] = 4;
+		len[R_CHANNEL] = 8;
+		len[G_CHANNEL] = 8;
+		len[B_CHANNEL] = 4;
 	} else {
 
 		/* Get the cube root of the color to identify color levels for each channel */
@@ -122,7 +122,7 @@ tagStatus convert_color(tagImageProp *input_img, tagImageProp *output_img, long 
 			return ERROR_INCORRECT_COLOR_LEVEL;
 		}
 
-		len[RED_CHANNEL] = len[GREEN_CHANNEL] = len[BLUE_CHANNEL] = color_cbr;
+		len[R_CHANNEL] = len[G_CHANNEL] = len[B_CHANNEL] = color_cbr;
 	}
 
 

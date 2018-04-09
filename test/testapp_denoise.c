@@ -123,28 +123,34 @@ int main(int argc, char *argv[])
 	LOG(OUTPUT, "\n########################################################\n");	
 
 
-	if((dump_to_file(output_img->buffer, output_img->size, "Basic_Filtering.raw")) != 0) {
+	if((dump_to_file(output_img->buffer, output_img->size, "OUT_DENOISED_Median_Gaussian.raw")) != 0) {
 		goto FREE_MEM;
 	}
+	LOG(OUTPUT, "Output Filename: OUT_DENOISED_Median_Gaussian.raw\n");
 
 
 	status = remove_image_noise(output_img_median, output_img, window_size, NOISE_REMOVE_LINEAR_FILTER);
 	if(status != ERROR_NONE) {
 		goto FREE_MEM;
 	}
+	
+	if((dump_to_file(output_img->buffer, output_img->size, "OUT_DENOISED_Median_Linear.raw")) != 0) {
+		goto FREE_MEM;
+	}
+	LOG(OUTPUT, "Output Filename: OUT_DENOISED_Median_Linear.raw\n");
+
+	
+	if((dump_to_file(output_img_median->buffer, output_img_median->size, "OUT_DENOISED_Median.raw")) != 0) {
+		goto FREE_MEM;
+	}
+	LOG(OUTPUT, "Output Filename: OUT_DENOISED_Median.raw\n");
+
+
 	LOG(OUTPUT, "Statistics for Image after Linear filtering\n");
 	print_psnr(original_img, output_img);
 	LOG(OUTPUT, "\n########################################################\n");	
 
 
-	if((dump_to_file(output_img->buffer, output_img->size, "Linear_Filtering.raw")) != 0) {
-		goto FREE_MEM;
-	}
-
-	
-	if((dump_to_file(output_img_median->buffer, output_img_median->size, "Median_Filtered.raw")) != 0) {
-		goto FREE_MEM;
-	}
 
 
 FREE_MEM:

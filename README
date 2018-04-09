@@ -10,6 +10,11 @@ This is a RGB image manipulation software capable of below features:
 	- Oil painting effect
 	- Film effect
 	- Image denosing for impulse noise and random gaussian noise.
+	- Image warping
+	- Panaroma Stichting
+	- Dithering
+	- Image halftoning (Grayscale and Color)
+	- Morphological Operations.
 
 
 Compiler Used:
@@ -27,21 +32,21 @@ cd bin/
 1. Conversion from RGB to Grayscale
 	Usage  : ./conv_gray_app <input image> <width> <height> <bits per pixel>
 	Example: ./conv_gray_app Tiffany.raw 512 512 3
-	Output : Processed_Lightness.raw, Processed_Average.raw, Processed_Luminosity.raw
+	Output : OUT_GRAY_Lightness.raw OUT_GRAY_Average.raw OUT_GRAY_Luminosity.raw
 2. Conversion from RGB to CMY color space
 	Usage  : ./conv_cmy_app <input image> <width> <height> <bits per pixel>
 	Example: ./conv_cmy_app Bear.raw 854 480 3
-	Output : CMY_out.raw, CYAN_out.raw, MAGENTA_out.raw, YELLOW_out.raw 
+	Output : OUT_CMY.raw OUT_CYAN.raw OUT_MAGENTA.raw OUT_YELLOW.raw
 3. RGB image resize application
 	Usage  : ./resize_app <input image> <input_width> <input_height> <input bits per pixel> <output_width> <output_height>
 	Example: ./resize_app Airplane.raw 512 512 3 650 650
-	Output : RESIZE_out.raw
-4. Contrast enhanceent application
+	Output : OUT_resize.raw
+4. Contrast enhancement application
 	Usage  : ./contrast_manip_app <input image> <input_width> <input_height> <input bits per pixel> <method>
 		       method: transfer or uniform
 	Example: ./contrast_manip_app Desk.raw 400 300 3 transfer
 	         ./contrast_manip_app Desk.raw 400 300 3 uniform
-	Output : Contrast_Enhanced.raw
+	Output : OUT_Contrast_Enhanced.raw
 5. Bring oil painting effect into RGB images
 	Usage  : ./oil_effect_app <input image> <width> <height> <bits per pixel> <window size> <colors> 
 	Example: ./oil_effect_app Barn.raw 380 275 3 5 64
@@ -49,11 +54,51 @@ cd bin/
 6. Bring film effect into RGB images
 	Usage  : ./film_effect_app <input image> <input_width> <input_height> <input bits per pixel>
 	Example: ./film_effect_app Original.raw 1000 750 3
-	Output : film_effect.raw
+	Output : OUT_film_effect.raw
 7. Perform basic image de-noising on RGB images and print the de-noising statistics.
 	Usage  : ./denoise_app <input image> <original_image> <input_width> <input_height> <input bits per pixel> <window size>
 	Example: ./denoise_app Lena_mixed.raw Lena.raw 512 512 3 5
-	Output : Median_Filtered.raw (for only median filtered output)
-	         Basic_Filtering.raw (for median + gaussian approximated non-linear filter output)
-	         Linear_Filtering.raw (for median + linear filter output)
+	Output : OUT_DENOISED_Median_Gaussian.raw (for only median filtered output)
+			 OUT_DENOISED_Median_Linear.raw (for median + gaussian approximated non-linear filter output)
+			 OUT_DENOISED_Median.raw (for median + linear filter output)
+8. Warp square image to disc shapped image
+	Usage  : ./warp_app <input image> <width> <height> <bits per pixel>
+	Example: ./warp_app puppy.raw 512 512 3  
+	Output : OUT_warped.raw, OUT_dewarped.raw
+9. Stitch image left middle and right images
+	Usage  : ./stitch_app <left image> <middle image> <right image> <width> <height> <bits per pixel>
+	Example: ./stitch_app left.raw middle.raw right.raw 480 640 3 
+	Output : OUT_stitched.raw (of resolution 2000x2000) 
+10. Dithering using Bayer matrices
+	Usage  : ./dither_app <input image> <input_width> <input_height> <input bits per pixel>
+	Example: ./dither_app colorchecker.raw 512 512 1 
+	Output : OUT_dither_fixed_binary.raw, OUT_dither_fixed_quad.raw, OUT_dither_random_binary.raw, 
+	         OUT_dither_random_quad.raw, OUT_dither_bayer_2_binary.raw, OUT_dither_bayer_4_binary.raw, 
+	         OUT_dither_bayer_8_binary.raw, OUT_dither_bayer_2_QUAD.raw, OUT_dither_bayer_4_QUAD.raw, 
+	         OUT_dither_bayer_8_QUAD.raw, 
+11. Error diffusion algorithm implementation
+	Usage  : ./err_diffuse_app <input image> <input_width> <input_height> <input bits per pixel>
+	Example: ./err_diffuse_app colorchecker.raw 512 512 1 
+	Output : OUT_error_diffuse_floyd_stein.raw, OUT_error_diffuse_jjn.raw, 
+	         OUT_error_diffuse_stucki.raw, OUT_error_diffuse_custom.raw
+12. Color halftoning
+	Usage  : ./color_halftone_app <input image> <width> <height> <bits per pixel>
+	Example: ./color_halftone_app flower.raw 700 700 3 
+	Output : OUT_color_halftone_separable.raw, OUT_color_halftone_mbvq.raw
+13. Morphological Processing - Shrinking
+	Usage  : ./shrink_app <input image> <input_width> <input_height> <input bits per pixel>
+	Example: ./shrink_app stars.raw 640 480 1 0
+	Output : OUT_shrinked.raw
+14.  Morphological Processing - Thinning
+	Usage  : ./thinning_app <input image> <input_width> <input_height> <input bits per pixel>
+	Example: thinning_app jigsaw_1.raw 100 100 1 1 
+	Output : OUT_thinned.raw
+15.  Morphological Processing - Skeletonize
+	Usage  : ./skeletonize_app <input image> <input_width> <input_height> <input bits per pixel>
+	Example: ./skeletonize_app jigsaw_2.raw 100 100 1 1 
+	Output : OUT_skeltonized.raw
+16.  Count number of objects and count of unique objects
+	Usage  : ./counting_game_app <input image> <input_width> <input_height> <input bits per pixel>
+	Example: ./counting_game_app board.raw 372 372 1 1
+	Output : None
 

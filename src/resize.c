@@ -72,10 +72,10 @@ void bilinear_interpolation(tagImageProp *input_img, tagImageProp *output_img)
 
 
 		/* Get the four surrounding pixels of input image */ 
-		buffern1 = get_input_pixel_ptr(input_img, base_h, base_w);
-		buffern2 = get_input_pixel_ptr(input_img, base_hp1, base_w);
-		buffern3 = get_input_pixel_ptr(input_img, base_h, base_wp1);
-		buffern4 = get_input_pixel_ptr(input_img, base_hp1, base_wp1);		
+		buffern1 = get_image_pixel_ptr(input_img, base_h, base_w);
+		buffern2 = get_image_pixel_ptr(input_img, base_hp1, base_w);
+		buffern3 = get_image_pixel_ptr(input_img, base_h, base_wp1);
+		buffern4 = get_image_pixel_ptr(input_img, base_hp1, base_wp1);		
 
 
 		/*

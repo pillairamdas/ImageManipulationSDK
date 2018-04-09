@@ -133,18 +133,22 @@ int main(int argc, char* argv[])
 	convert(input_img, output_img_yellow, COLORSPACE_YELLOW);
 	
 
-	if((dump_to_file(output_img_cmy->buffer, output_img_cmy->size, "CMY_out.raw")) != 0) {
-		goto FREE_MEM;
-	}	
-	if((dump_to_file(output_img_cyan->buffer, output_img_cyan->size, "CYAN_out.raw")) != 0) {
+	if((dump_to_file(output_img_cmy->buffer, output_img_cmy->size, "OUT_CMY.raw")) != 0) {
 		goto FREE_MEM;
 	}
-	if((dump_to_file(output_img_magenta->buffer, output_img_magenta->size, "MAGENTA_out.raw")) != 0) {
+	LOG(OUTPUT, "Output Filename: OUT_CMY.raw\n");
+	if((dump_to_file(output_img_cyan->buffer, output_img_cyan->size, "OUT_CYAN.raw")) != 0) {
 		goto FREE_MEM;
 	}
-	if((dump_to_file(output_img_yellow->buffer, output_img_yellow->size, "YELLOW_out.raw")) != 0) {
+	LOG(OUTPUT, "Output Filename: OUT_CYAN.raw\n");
+	if((dump_to_file(output_img_magenta->buffer, output_img_magenta->size, "OUT_MAGENTA.raw")) != 0) {
 		goto FREE_MEM;
 	}
+	LOG(OUTPUT, "Output Filename: OUT_MAGENTA.raw\n");
+	if((dump_to_file(output_img_yellow->buffer, output_img_yellow->size, "OUT_YELLOW.raw")) != 0) {
+		goto FREE_MEM;
+	}
+	LOG(OUTPUT, "Output Filename: OUT_YELLOW.raw\n");
 
 
 FREE_MEM:

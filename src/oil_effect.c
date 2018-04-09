@@ -80,12 +80,12 @@ tagStatus oil_effect(tagImageProp *input_img, tagImageProp *output_img, int32_t 
 
 				
 				/* Get the buffer the window position */ 
-				buffer = get_input_pixel_ptr(input_img, window_vert, window_horiz);
+				buffer = get_image_pixel_ptr(input_img, window_vert, window_horiz);
 
 				/* Note the color levels of window pixels */
-				++red_bin[*(buffer + RED_CHANNEL)];
-				++green_bin[*(buffer + GREEN_CHANNEL)];
-				++blue_bin[*(buffer + BLUE_CHANNEL)];
+				++red_bin[*(buffer + R_CHANNEL)];
+				++green_bin[*(buffer + G_CHANNEL)];
+				++blue_bin[*(buffer + B_CHANNEL)];
 
 			}
 		}
@@ -94,9 +94,9 @@ tagStatus oil_effect(tagImageProp *input_img, tagImageProp *output_img, int32_t 
 		/* Assign the pixel intensity occuring maximum times on the window 
 		/* to the output image pixel 
 		*/ 
-		*(output_img->buffer + iterator*output_img->bpp + RED_CHANNEL) = index_max(red_bin, RGB_PIXEL_LEVELS);
-		*(output_img->buffer + iterator*output_img->bpp + GREEN_CHANNEL) = index_max(green_bin, RGB_PIXEL_LEVELS);
-		*(output_img->buffer + iterator*output_img->bpp + BLUE_CHANNEL) = index_max(blue_bin, RGB_PIXEL_LEVELS);
+		*(output_img->buffer + iterator*output_img->bpp + R_CHANNEL) = index_max(red_bin, RGB_PIXEL_LEVELS);
+		*(output_img->buffer + iterator*output_img->bpp + G_CHANNEL) = index_max(green_bin, RGB_PIXEL_LEVELS);
+		*(output_img->buffer + iterator*output_img->bpp + B_CHANNEL) = index_max(blue_bin, RGB_PIXEL_LEVELS);
 
 		++iterator;
 	}

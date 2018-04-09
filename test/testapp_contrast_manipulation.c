@@ -68,9 +68,10 @@ int main(int argc, char *argv[])
 	}
 
 
-	if((dump_to_file(output_img->buffer, output_img->size, "Contrast_Enhanced.raw")) != 0) {
+	if((dump_to_file(output_img->buffer, output_img->size, "OUT_Contrast_Enhanced.raw")) != 0) {
 		goto FREE_MEM;
 	}
+	LOG(OUTPUT, "Output Filename: OUT_Contrast_Enhanced.raw\n");
 
 FREE_MEM:
 

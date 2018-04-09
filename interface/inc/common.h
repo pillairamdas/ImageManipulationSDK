@@ -37,9 +37,12 @@ typedef enum LOG_STATE {
 #define CMY_BITS_PER_PIXEL				3
 #define MAX_PIXEL_LEVEL 				255
 #define RGB_PIXEL_LEVELS				256
-#define RED_CHANNEL                     0
-#define GREEN_CHANNEL                   1
-#define BLUE_CHANNEL                    2
+#define R_CHANNEL                       0
+#define G_CHANNEL                       1
+#define B_CHANNEL                       2
+#define C_CHANNEL                       0
+#define M_CHANNEL                       1
+#define Y_CHANNEL                       2
 
 
 typedef enum tagColorspace {
@@ -87,6 +90,46 @@ typedef enum tagFilterType {
 	FILTER_MEDIAN
 } tagFilterType;
 
+/* Supported morphing types */
+typedef enum type_morphing {
+      SHRINKING     = 0x1,
+      THINNING      = 0x2,
+      SKELETONIZING = 0x4
+} type_morphing;
+
+/* Foreground color information */
+typedef enum tagForegroundColor {
+      FG_WHITE,
+      FG_BLACK
+} tagForegroundColor;
+
+/* Supported methods to perform image dithering */
+typedef enum tagDithertingMethod {
+	DITHERING_FIXED_BINARY,
+	DITHERING_FIXED_QUAD,
+	DITHERING_RANDOM_BINARY,
+	DITHERING_RANDOM_QUAD,
+	DITHERING_BAYER_2_BINARY,
+	DITHERING_BAYER_4_BINARY,
+	DITHERING_BAYER_8_BINARY,
+	DITHERING_BAYER_2_QUAD,
+	DITHERING_BAYER_4_QUAD,
+	DITHERING_BAYER_8_QUAD
+} tagDithertingMethod;
+
+/* Supported error diffusion methods */
+typedef enum tagErrorDiffusionMethod {
+	ERROR_DIFFUSE_FLYD_STEIN,
+	ERROR_DIFFUSE_JJN,
+	ERROR_DIFFUSE_STUCKI,
+	ERROR_DIFFUSE_CUSTOM
+} tagErrorDiffusionMethod;
+
+/* Supported color halftoning methods */
+typedef enum tagColorHalftoneMethod {
+	COLOR_HALFTONE_SEPARABLE,
+	COLOR_HALFTONE_MBVQ
+} tagColorHalftoneMethod;
 
 
 /* Image Properties */
@@ -99,7 +142,19 @@ typedef struct tagImageProp {
     int        pixel_count;
 } tagImageProp;
 
-
+/* Object Properties */
+typedef struct tagObject {
+	int32_t 	top_index;
+	int32_t 	left_index;
+	int32_t 	right_index;
+	int32_t 	bottom_index;
+	int32_t 	pixel_count;
+	int32_t 	height;
+	int32_t 	width;
+	int32_t 	bpp;
+	int32_t 	size;
+	uint8_t    *buffer;
+} tagObject;
 
 
 #endif // #ifndef __COMMON_H__

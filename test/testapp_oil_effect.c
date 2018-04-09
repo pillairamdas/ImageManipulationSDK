@@ -89,9 +89,10 @@ int main(int argc, char *argv[])
 		goto FREE_MEM;
 	}
 
-	if((dump_to_file(output_img->buffer, output_img->size, "oil_effect.raw")) != 0) {
+	if((dump_to_file(output_img->buffer, output_img->size, "OUT_oil_effect.raw")) != 0) {
 		goto FREE_MEM;
 	}
+	LOG(OUTPUT, "Output Filename: OUT_oil_effect.raw\n");
 
 FREE_MEM:
 

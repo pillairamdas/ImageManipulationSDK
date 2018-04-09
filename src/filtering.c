@@ -168,20 +168,20 @@ void median_filtering(tagImageProp *input_img, tagImageProp *output_img, int32_t
 					n = 2 * input_img->width + 1 - n;
 
 				/* Fetch the pixel on the window */
-				buffer = get_input_pixel_ptr(input_img, m, n);
+				buffer = get_image_pixel_ptr(input_img, m, n);
 
 				/* Store the window pixel intensities in the array */
-				red_bin[k]   = *(buffer + RED_CHANNEL);
-				green_bin[k] = *(buffer + GREEN_CHANNEL);
-				blue_bin[k]  = *(buffer + BLUE_CHANNEL);
+				red_bin[k]   = *(buffer + R_CHANNEL);
+				green_bin[k] = *(buffer + G_CHANNEL);
+				blue_bin[k]  = *(buffer + B_CHANNEL);
 				++k;
 			}
 		}
 
 		/* Get the median and assign to the output image */
-		*(output_img->buffer + iterator*input_img->bpp + RED_CHANNEL) = get_median(red_bin, N*N);
-		*(output_img->buffer + iterator*input_img->bpp + GREEN_CHANNEL) = get_median(green_bin, N*N);
-		*(output_img->buffer + iterator*input_img->bpp + BLUE_CHANNEL) = get_median(blue_bin, N*N);
+		*(output_img->buffer + iterator*input_img->bpp + R_CHANNEL) = get_median(red_bin, N*N);
+		*(output_img->buffer + iterator*input_img->bpp + G_CHANNEL) = get_median(green_bin, N*N);
+		*(output_img->buffer + iterator*input_img->bpp + B_CHANNEL) = get_median(blue_bin, N*N);
 
 		++iterator;
 	}
@@ -305,19 +305,19 @@ tagStatus apply_filter(tagImageProp *input_img, tagImageProp *output_img, int32_
 						n = 2 * input_img->width + 1 - n;
 
 					/* Fetch the pixel at window coordinates m,n */
-					buffer = get_input_pixel_ptr(input_img, m, n);
+					buffer = get_image_pixel_ptr(input_img, m, n);
 
 					/* Apply the Gaussian kernel on the window pixels */
-					sum_channel_val[RED_CHANNEL] += *(buffer) * kernel[i + Nby2][j + Nby2];
-					sum_channel_val[GREEN_CHANNEL] += *(buffer + GREEN_CHANNEL) * kernel[i + Nby2][j + Nby2];
-					sum_channel_val[BLUE_CHANNEL] += *(buffer + BLUE_CHANNEL) * kernel[i + Nby2][j + Nby2];
+					sum_channel_val[R_CHANNEL] += *(buffer) * kernel[i + Nby2][j + Nby2];
+					sum_channel_val[G_CHANNEL] += *(buffer + G_CHANNEL) * kernel[i + Nby2][j + Nby2];
+					sum_channel_val[B_CHANNEL] += *(buffer + B_CHANNEL) * kernel[i + Nby2][j + Nby2];
 				}
 			}
 
 			/* Normal the gray scale values by the gaussian filter sum and assign to output*/
-			*(output_img->buffer + iterator*output_img->bpp + RED_CHANNEL) = sum_channel_val[RED_CHANNEL] / filter_sum;
-			*(output_img->buffer + iterator*output_img->bpp + GREEN_CHANNEL) = sum_channel_val[GREEN_CHANNEL] / filter_sum;
-			*(output_img->buffer + iterator*output_img->bpp + BLUE_CHANNEL) = sum_channel_val[BLUE_CHANNEL] / filter_sum;
+			*(output_img->buffer + iterator*output_img->bpp + R_CHANNEL) = sum_channel_val[R_CHANNEL] / filter_sum;
+			*(output_img->buffer + iterator*output_img->bpp + G_CHANNEL) = sum_channel_val[G_CHANNEL] / filter_sum;
+			*(output_img->buffer + iterator*output_img->bpp + B_CHANNEL) = sum_channel_val[B_CHANNEL] / filter_sum;
 
 			++iterator;
 		}

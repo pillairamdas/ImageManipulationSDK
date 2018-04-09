@@ -56,9 +56,9 @@ void histogram_modify(tagImageProp *input_img, tagImageProp *output_img, tagHist
 	iterator = 0;
 	LOG(OUTPUT, "Histogram of input image: \n");
 	while(iterator < RGB_PIXEL_LEVELS) {
-		LOG(OUTPUT, "Red %d Green %d Blue %d\n", gray_level_bin[RED_CHANNEL][iterator], \
-			                                gray_level_bin[GREEN_CHANNEL][iterator], \
-			                                gray_level_bin[BLUE_CHANNEL][iterator]);
+		LOG(OUTPUT, "Red %d Green %d Blue %d\n", gray_level_bin[R_CHANNEL][iterator], \
+			                                gray_level_bin[G_CHANNEL][iterator], \
+			                                gray_level_bin[B_CHANNEL][iterator]);
 		++iterator;
 	}
 	LOG(OUTPUT, "\n");
@@ -135,18 +135,18 @@ void histogram_modify(tagImageProp *input_img, tagImageProp *output_img, tagHist
 			/* Add custom RGB weights */
 			/* Weight R by 1.5 times, G by 2/3 and B by 2/3 */
 
-			tempval = *(buffer + RED_CHANNEL) * 1.5;
+			tempval = *(buffer + R_CHANNEL) * 1.5;
 			if(tempval > MAX_PIXEL_LEVEL) {
 				tempval = MAX_PIXEL_LEVEL;
 			}
 
-			*(output_img->buffer + iterator*output_img->bpp + RED_CHANNEL) = tx_red_bins[tempval] * MAX_PIXEL_LEVEL;
+			*(output_img->buffer + iterator*output_img->bpp + R_CHANNEL) = tx_red_bins[tempval] * MAX_PIXEL_LEVEL;
 
-			tempval = (*(buffer + GREEN_CHANNEL) * 2 ) / 3;
-			*(output_img->buffer + iterator*output_img->bpp + GREEN_CHANNEL) = tx_green_bins[tempval] * MAX_PIXEL_LEVEL;
+			tempval = (*(buffer + G_CHANNEL) * 2 ) / 3;
+			*(output_img->buffer + iterator*output_img->bpp + G_CHANNEL) = tx_green_bins[tempval] * MAX_PIXEL_LEVEL;
 
-			tempval = (*(buffer + BLUE_CHANNEL) * 2) / 3;
-			*(output_img->buffer + iterator*output_img->bpp + BLUE_CHANNEL) = tx_blue_bins[tempval] * MAX_PIXEL_LEVEL;
+			tempval = (*(buffer + B_CHANNEL) * 2) / 3;
+			*(output_img->buffer + iterator*output_img->bpp + B_CHANNEL) = tx_blue_bins[tempval] * MAX_PIXEL_LEVEL;
 
 			++iterator;
 		}

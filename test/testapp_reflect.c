@@ -56,9 +56,10 @@ int main(int argc, char *argv[])
 	reflect(input_img, output_img);
 
 
-	if((dump_to_file(output_img->buffer, output_img->size, "reflection.raw")) != 0) {
+	if((dump_to_file(output_img->buffer, output_img->size, "OUT_reflection.raw")) != 0) {
 		goto FREE_MEM;
 	}
+	LOG(OUTPUT, "Output Filename: OUT_reflection.raw\n");
 
 FREE_MEM:
 
